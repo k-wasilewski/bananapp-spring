@@ -8,6 +8,6 @@ import java.io.IOException;
 public class AnotherController {
     @RequestMapping(value = {"/anothers"})
     public String handleFoo() throws IOException {
-        return "redirect:another.html";
+        return "redirect:another.jsp";
     }
 }
