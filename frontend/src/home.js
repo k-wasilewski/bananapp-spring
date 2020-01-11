@@ -71,11 +71,13 @@ class Home extends Component {
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">{this.state.message}</h1>
-                    <Link to="/anothers">
-                        <button variant="outlined">
-                            another by Spring
-                        </button>
-                    </Link>
+                    <Router>
+                        <a href={'http://localhost:8081/anothers'}>
+                            <button variant="outlined">
+                                another by Spring
+                            </button>
+                        </a>
+                    </Router>
                     <Link to="/anotherr">
                         <button variant="outlined">
                             another by React
