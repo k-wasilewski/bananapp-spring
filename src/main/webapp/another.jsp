@@ -5,10 +5,7 @@
 </head>
 <body>
 <h3>from Spring MVC controller</h3>
-<a href="/">back to React App</a>
-
-<!-- not working!!!!!!!!!! -->
-<spring:url value="./another.js" var="another" />
-<script src="${another}" type="text/javascript"></script>
+<a href="http://localhost:3000">back to React App</a>
+<a href="http://localhost:8081">back to Spring index</a>
 </body>
 </html>
