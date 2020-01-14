@@ -81,6 +81,13 @@ class Home extends Component {
                             another by React
                         </button>
                     </Link>
+                    <Router>
+                        <a href={'http://localhost:8082/hello'}>
+                            <button variant="outlined">
+                                Google App
+                            </button>
+                        </a>
+                    </Router>
                     <input type="file" name="avatar" onChange={this.fileChangedHandler} />
                     <button type="button" onClick={this.submit} > Upload </button>
                     { $imagePreview }
