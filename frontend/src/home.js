@@ -32,19 +32,34 @@ class Home extends Component {
 
     submit = () => {
 
+        console.log("post sent from frontend8081");
+
         var fd = new FormData();
 
         fd.append('file', this.state.selectedFile);
 
         var request = new XMLHttpRequest();
-
         request.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 alert('Uploaded!');
+            }else{
+                console.log("fail"+this.status+" "+this.statusText);
             }
         };
+        request.onload = function() {
+            console.log(`Loaded: ${request.status} ${request.response}`);
+        };
+        request.onerror = function() { // only triggers if the request couldn't be made at all
+            console.log(`Network Error`);
+        };
+        request.onprogress = function(event) { // triggers periodically
+                                           // event.loaded - how many bytes downloaded
+                                           // event.lengthComputable = true if the server sent Content-Length header
+                                           // event.total - total number of bytes (if lengthComputable)
+            console.log(`Received ${event.loaded} of ${event.total}`);
+        };
         //request.open("POST", "https://us-central1-tutorial-e6ea7.cloudfunctions.net/fileUpload", true);
-        request.open("POST", "localhost:8080/image", true);
+        request.open("POST", "http://localhost:8080/image", true);
         request.send(fd);
     }
 
