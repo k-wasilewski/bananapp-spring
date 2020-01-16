@@ -7,9 +7,6 @@ MAINTAINER Kuba Wasilewski <k.k.wasilewski@gmail.com>
 # Add a volume pointing to /tmp
 VOLUME /tmp
 
-# Make port 8083 available to the world outside this container
-EXPOSE 8083
-
 # The application's jar file
 ARG JAR_FILE=target/spring-and-react-0.0.1-SNAPSHOT.jar
 
