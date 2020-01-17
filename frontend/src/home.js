@@ -47,7 +47,7 @@ class Home extends Component {
             }
         };
         request.onload = function() {
-            console.log(`Loaded: ${request.status} ${request.response}`);
+            console.log(`Loaded: ${request.status}, response: ${request.response}`);
         };
         request.onerror = function() { // only triggers if the request couldn't be made at all
             console.log(`Network Error`);
