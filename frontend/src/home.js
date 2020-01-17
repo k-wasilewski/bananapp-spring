@@ -59,7 +59,7 @@ class Home extends Component {
             console.log(`Received ${event.loaded} of ${event.total}`);
         };
         //request.open("POST", "https://us-central1-tutorial-e6ea7.cloudfunctions.net/fileUpload", true);
-        request.open("POST", "http://localhost:8080/image", true);
+        request.open("POST", "http://localhost:8082/image", true);
         request.send(fd);
     }
 
@@ -91,7 +91,7 @@ class Home extends Component {
                         </button>
                     </Link>
                     <Router>
-                        <a href={'http://localhost:8080/hello'}>
+                        <a href={'http://localhost:8082/hello'}>
                             <button variant="outlined">
                                 Google App
                             </button>
