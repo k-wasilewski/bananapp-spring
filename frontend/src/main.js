@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Another from './another';
 import Home from "./home";
+import Results from "./results";
 
 const Main = () => {
     return (

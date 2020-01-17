@@ -10,7 +10,8 @@ class Home extends Component {
 
     state =  {
         selectedFile: null,
-        imagePreviewUrl: null
+        imagePreviewUrl: null,
+        prediction: null
     };
 
     fileChangedHandler = event => {
@@ -41,13 +42,18 @@ class Home extends Component {
         var request = new XMLHttpRequest();
         request.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-                alert('Uploaded!');
+                //alert('Uploaded!');
             }else{
                 console.log("fail"+this.status+" "+this.statusText);
             }
+            alert('response header: '+this.statusText);
         };
+        var $this = this;
         request.onload = function() {
             console.log(`Loaded: ${request.status}, response: ${request.response}`);
+            $this.setState({
+                prediction: request.response
+            });
         };
         request.onerror = function() { // only triggers if the request couldn't be made at all
             console.log(`Network Error`);
@@ -61,6 +67,8 @@ class Home extends Component {
         //request.open("POST", "https://us-central1-tutorial-e6ea7.cloudfunctions.net/fileUpload", true);
         request.open("POST", "http://localhost:8082/image", true);
         request.send(fd);
+
+
     }
 
     componentDidMount() {
@@ -80,7 +88,7 @@ class Home extends Component {
         if (this.state.imagePreviewUrl) {
             $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
         }
-        return (
+        if (this.state.prediction == null) return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
@@ -105,6 +113,9 @@ class Home extends Component {
                     To get started, edit <code>src/App.js</code> and save to reload.
                 </p>
             </div>
+        );
+        else return(
+            <h3> { this.state.prediction } </h3>
         );
     }
 }
