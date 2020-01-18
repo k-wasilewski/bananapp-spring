@@ -4,14 +4,18 @@ import './App.css';
 import {
     BrowserRouter as Router,
     Link,
+    Redirect
 } from 'react-router-dom';
+import Results from "./results";
+import Main from "./main";
 
 class Home extends Component {
 
     state =  {
         selectedFile: null,
         imagePreviewUrl: null,
-        prediction: null
+        prediction: null,
+        redirect: false
     };
 
     fileChangedHandler = event => {
@@ -52,7 +56,8 @@ class Home extends Component {
         request.onload = function() {
             console.log(`Loaded: ${request.status}, response: ${request.response}`);
             $this.setState({
-                prediction: request.response
+                prediction: request.response,
+                redirect: true
             });
         };
         request.onerror = function() { // only triggers if the request couldn't be made at all
@@ -67,8 +72,6 @@ class Home extends Component {
         //request.open("POST", "https://us-central1-tutorial-e6ea7.cloudfunctions.net/fileUpload", true);
         request.open("POST", "http://localhost:8082/image", true);
         request.send(fd);
-
-
     }
 
     componentDidMount() {
@@ -88,7 +91,7 @@ class Home extends Component {
         if (this.state.imagePreviewUrl) {
             $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
         }
-        if (this.state.prediction == null) return (
+        if (!this.state.redirect) return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
@@ -114,9 +117,17 @@ class Home extends Component {
                 </p>
             </div>
         );
-        else return(
+        else {
+            return (
+                <Redirect to={{
+                    pathname: '/results',
+                    state: { prediction: this.state.prediction }
+                }}/>
+            )
+        }
+        /*return <Redirect to='/somewhere'/>;
             <h3> { this.state.prediction } </h3>
-        );
+        );*/
     }
 }
 
