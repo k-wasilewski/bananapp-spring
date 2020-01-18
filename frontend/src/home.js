@@ -6,8 +6,6 @@ import {
     Link,
     Redirect
 } from 'react-router-dom';
-import Results from "./results";
-import Main from "./main";
 
 class Home extends Component {
 
@@ -15,7 +13,7 @@ class Home extends Component {
         selectedFile: null,
         imagePreviewUrl: null,
         prediction: null,
-        redirect: false
+        redirect: false,
     };
 
     fileChangedHandler = event => {
@@ -45,16 +43,13 @@ class Home extends Component {
 
         var request = new XMLHttpRequest();
         request.onreadystatechange = function() {
-            if (this.readyState === 4 && this.status === 200) {
-                //alert('Uploaded!');
-            }else{
-                console.log("fail"+this.status+" "+this.statusText);
+            if (this.status === 200) {
+                //console.log(this.status+" "+this.statusText);
             }
-            alert('response header: '+this.statusText);
         };
         var $this = this;
         request.onload = function() {
-            console.log(`Loaded: ${request.status}, response: ${request.response}`);
+            console.log(`Response: ${request.response}`);
             $this.setState({
                 prediction: request.response,
                 redirect: true
@@ -121,7 +116,8 @@ class Home extends Component {
             return (
                 <Redirect to={{
                     pathname: '/results',
-                    state: { prediction: this.state.prediction }
+                    state: { prediction: this.state.prediction,
+                            img: this.state.imagePreviewUrl}
                 }}/>
             )
         }
