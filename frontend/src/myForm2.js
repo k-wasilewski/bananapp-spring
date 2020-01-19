@@ -3,7 +3,7 @@ import { Formiz, useForm } from '@formiz/core'
 import { isEmail } from '@formiz/validations' // Import some validations
 import { MyField } from './myField' // Import your field
 
-export const MyForm = () => {
+export const MyForm2 = () => {
     const myForm = useForm();
     const handleSubmit = (values) => {
         console.log(values)
@@ -31,18 +31,6 @@ export const MyForm = () => {
                     name="password"
                     label="Password: "
                     type="password"
-                />
-                <MyField
-                    name="passwordConfirm"
-                    label="Confirm password: "
-                    type="password"
-                    validations={[
-                        {
-                            rule: (value) => myForm.values.password === value,
-                            deps: [myForm.values.password],
-                            message: 'Passwords do not match',
-                        }
-                    ]}
                 />
                 <button
                     type="submit"

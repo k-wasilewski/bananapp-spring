@@ -7,6 +7,7 @@ import {
     Redirect
 } from 'react-router-dom';
 import {MyForm} from "./myForm";
+import {MyForm2} from "./myForm2";
 
 class Home extends Component {
 
@@ -15,13 +16,18 @@ class Home extends Component {
         imagePreviewUrl: null,
         prediction: null,
         redirect: false,
-        login2: false
+        login2: false,
+        login3: false
     };
 
     login2 = () => {
-        this.setState({
-            login2: true
-        })
+        if (!this.state.login2) this.setState({login2: true})
+        else this.setState({login2: false})
+    }
+
+    login3 = () => {
+        if (!this.state.login3) this.setState({login3: true})
+        else this.setState({login3: false})
     }
 
     fileChangedHandler = event => {
@@ -102,7 +108,16 @@ class Home extends Component {
                     <MyForm />
                 </div>
             )
-        }
+        } else $form2 = (<div />)
+        let $form3;
+        if ( this.state.login3 ) {
+            console.log("login3 rendered");
+            $form3 = (
+                <div>
+                    <MyForm2 />
+                </div>
+            )
+        } else $form3 = (<div />)
         if (!this.state.redirect) return (
             <div className="App">
                 <header className="App-header">
@@ -110,12 +125,17 @@ class Home extends Component {
                     <h1 className="App-title">{this.state.message}</h1>
                     <Link to="/login1">
                         <button variant="outlined">
-                            login to your account1
+                            Log-in to your account1
                         </button>
                     </Link>
                         <button variant="outlined" onClick={this.login2}>
-                            login to your account2
+                            Register
                         </button>
+                    { $form2 }
+                    <button variant="outlined" onClick={this.login3}>
+                        Log-in
+                    </button>
+                    { $form3 }
                     <Router>
                         <a href={'http://localhost:8082/hello'}>
                             <button variant="outlined">
@@ -126,7 +146,6 @@ class Home extends Component {
                     <input type="file" name="avatar" onChange={this.fileChangedHandler} />
                     <button type="button" onClick={this.submit} > Upload </button>
                     { $imagePreview }
-                    { $form2 }
                 </header>
             </div>
         );

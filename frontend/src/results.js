@@ -29,7 +29,7 @@ class Results extends React.Component {
             <div className="App">
                 <header className="App-header">
                     <img src={img} style={{maxHeight: "500px"}} />
-                    <h3> your banana is { days } old </h3>
+                    <h3> Your banana is { days } old, </h3>
                     <h3> with { accuracy[1]*100 }% certainty</h3>
                     <Link to="/">
                         <button variant="outlined">
