@@ -6,6 +6,7 @@ import {
     Link,
     Redirect
 } from 'react-router-dom';
+import {MyForm} from "./myForm";
 
 class Home extends Component {
 
@@ -14,7 +15,14 @@ class Home extends Component {
         imagePreviewUrl: null,
         prediction: null,
         redirect: false,
+        login2: false
     };
+
+    login2 = () => {
+        this.setState({
+            login2: true
+        })
+    }
 
     fileChangedHandler = event => {
         this.setState({
@@ -86,16 +94,28 @@ class Home extends Component {
         if (this.state.imagePreviewUrl) {
             $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
         }
+        let $form2;
+        if ( this.state.login2 ) {
+            console.log("login2 rendered");
+            $form2 = (
+                <div>
+                    <MyForm />
+                </div>
+            )
+        }
         if (!this.state.redirect) return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">{this.state.message}</h1>
-                    <Link to="/anotherr">
+                    <Link to="/login1">
                         <button variant="outlined">
-                            another by React
+                            login to your account1
                         </button>
                     </Link>
+                        <button variant="outlined" onClick={this.login2}>
+                            login to your account2
+                        </button>
                     <Router>
                         <a href={'http://localhost:8082/hello'}>
                             <button variant="outlined">
@@ -106,13 +126,11 @@ class Home extends Component {
                     <input type="file" name="avatar" onChange={this.fileChangedHandler} />
                     <button type="button" onClick={this.submit} > Upload </button>
                     { $imagePreview }
+                    { $form2 }
                 </header>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
             </div>
         );
-        else {
+        else if (this.state.redirect) {
             return (
                 <Redirect to={{
                     pathname: '/results',
@@ -121,9 +139,6 @@ class Home extends Component {
                 }}/>
             )
         }
-        /*return <Redirect to='/somewhere'/>;
-            <h3> { this.state.prediction } </h3>
-        );*/
     }
 }
 
