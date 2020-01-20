@@ -1,12 +1,25 @@
 import React from 'react'
 import { Formiz, useForm } from '@formiz/core'
 import { isEmail } from '@formiz/validations' // Import some validations
-import { MyField } from './myField' // Import your field
+import { MyField } from './myField'
+import axios from "axios";
 
+//login
 export const MyForm2 = () => {
     const myForm = useForm();
     const handleSubmit = (values) => {
-        console.log(values)
+        console.log(values.email+", "+values.password);
+        axios.post("http://localhost:8081/username="+values[0]+"&password="+values[1]).then(function (response) {
+            if(response.data.code === 200){
+                console.log("login success");
+                window.location('http://localhost:8081/success')
+            } else {
+                console.log("login response: "+response.data.code);
+            }
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
     return (
         <Formiz

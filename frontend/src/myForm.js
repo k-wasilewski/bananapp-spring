@@ -2,11 +2,13 @@ import React from 'react'
 import { Formiz, useForm } from '@formiz/core'
 import { isEmail } from '@formiz/validations' // Import some validations
 import { MyField } from './myField' // Import your field
+import axios from "axios";
 
+//register
 export const MyForm = () => {
     const myForm = useForm();
-    const handleSubmit = (values) => {
-        console.log(values)
+    const handleSubmit = (event) => {
+
     };
     return (
         <Formiz

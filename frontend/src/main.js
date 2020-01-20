@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from "./home";
+import Success from "./success";
 import Results from "./results";
 import Login from "./login";
 import NameForm from "./nameForm";
@@ -14,6 +15,7 @@ const Main = () => {
             <Route exact path='/login1' component={NameForm}></Route>
             <Route exact path='/login2' component={MyForm}></Route>
             <Route exact path='/results' component={Results}></Route>
+            <Route exact path='/success' component={Success}></Route>
         </Switch>
     );
 }
