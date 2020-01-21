@@ -58,7 +58,7 @@ class Home extends Component {
         var request = new XMLHttpRequest();
         request.onreadystatechange = function() {
             if (this.status === 200) {
-                //console.log(this.status+" "+this.statusText);
+                console.log("at home: "+this.status+" "+this.statusText);
             }
         };
         var $this = this;
@@ -111,7 +111,6 @@ class Home extends Component {
         } else $form2 = (<div />)
         let $form3;
         if ( this.state.login3 ) {
-            console.log("login3 rendered");
             $form3 = (
                 <div>
                     <MyForm2 />
@@ -149,7 +148,7 @@ class Home extends Component {
                 </header>
             </div>
         );
-        else if (this.state.redirect) {
+        else if ($form3.state) {
             return (
                 <Redirect to={{
                     pathname: '/results',

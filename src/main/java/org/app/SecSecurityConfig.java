@@ -36,8 +36,8 @@ public class SecSecurityConfig
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("user").password("user").roles("USER")
+                .withUser("user@user.com").password("{noop}user").roles("USER")
                 .and()
-                .withUser("admin").password("admin").roles("ADMIN");
+                .withUser("admin").password("{noop}admin").roles("ADMIN");
     }
 }
