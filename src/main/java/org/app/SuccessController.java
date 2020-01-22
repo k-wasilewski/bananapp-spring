@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
-/*@RestController
+@RestController
 public class SuccessController {
     @GetMapping("/success")
     public String success() {
-        return "index";
+        return "success";
     }
-}*/
+}

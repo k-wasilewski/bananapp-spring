@@ -1,4 +1,7 @@
 import React from 'react';
+import {MyField} from "./myField";
+import {isEmail} from "@formiz/validations";
+import axios from "axios";
 
 class NameForm extends React.Component {
     constructor(props) {
@@ -6,19 +9,48 @@ class NameForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(e) {
-        alert('The value is: ' + this.input.value);
-        e.preventDefault();
+    handleSubmit(values, event) {
+        console.log(values.email + ", " + values.password);
+
+        axios({
+            method: 'post',
+            url: '/',
+            data: {
+                j_username: values.email,
+                j_password: values.password
+            }
+        }).then(function (response) {
+            if (response.status === 200) {
+                console.log("login success");
+                console.log(response.data);
+            } else {
+                console.log("login response: " + JSON.stringify(response));
+            }
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Name:
-                    <input type="text" ref={(input) => this.input = input} />
-                </label>
-                <input type="submit" value="Submit" />
+            <form action={this.handleSubmit}>
+                <label>User: </label>
+                <input
+                    name="email"
+                />
+                <br/>
+                <label>Password: </label>
+                <input
+                    name="password"
+                    type="password"
+                />
+                <br/>
+                <button
+                    type="submit"
+                >
+                    Submit
+                </button>
             </form>
         );
     }

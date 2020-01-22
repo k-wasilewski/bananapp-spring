@@ -8,6 +8,11 @@ import {
 } from 'react-router-dom';
 import {MyForm} from "./myForm";
 import {MyForm2} from "./myForm2";
+import NameForm from "./nameForm";
+import {MyField} from "./myField";
+import {isEmail} from "@formiz/validations";
+import {Formiz, useForm} from "@formiz/core";
+import axios from "axios";
 
 class Home extends Component {
 
@@ -84,7 +89,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        setInterval(this.hello, 250);
+        //setInterval(this.hello, 250);
     }
 
     hello = () => {
@@ -110,12 +115,10 @@ class Home extends Component {
             )
         } else $form2 = (<div />)
         let $form3;
+
         if ( this.state.login3 ) {
-            $form3 = (
-                <div>
-                    <MyForm2 />
-                </div>
-            )
+            $form3 = (<MyForm2/>)
+            //$form3 = < NameForm />
         } else $form3 = (<div />)
         if (!this.state.redirect) return (
             <div className="App">
