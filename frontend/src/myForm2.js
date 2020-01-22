@@ -17,34 +17,17 @@ export const MyForm2 = () => {
     const handleSubmit = (values, event) => {
         console.log(values.email + ", " + values.password);
 
-        //curl -d j_username=user@user.com -d j_password=user -L http://localhost:8081
+        //WORKS:
+        //curl -d username=user@user.com -d password=user -L http://localhost:8081
 
-        axios({
-            method: 'post',
-            url: '/',
-            data: {
-                username: values.email,
-                password: values.password
-            }
-        }).then(function (response) {
+        axios.post('http://localhost:8081',{
+            username: values.email,
+            password: values.password}).then(function (response) {
             if (response.status === 200) {
-                console.log("login success");
                 console.log(response.data);
                 setRedirect(JSON.stringify(response.data));
-            } else {
-                console.log("login response: " + JSON.stringify(response));
-            }
-        })
-            .catch(function (error) {
-                console.log(error);
-            });
-        //try5
-        /*axios.post('http://localhost:9090/login',{
-            username: this.state.username,
-            password: this.state.password})*/
+            }});
     };
-
-    //console.log("resp: "+JSON.stringify(resp));   //--ALWAYS "null"
 
     if (redirect==0) {return (
         <Formiz
