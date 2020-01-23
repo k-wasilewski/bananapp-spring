@@ -29,47 +29,50 @@ export const MyForm2 = () => {
             }});*/
 
         axios.post('http://localhost:8081',
-            "username="+values.email+"&"+"password="+values.password
+            "username=" + values.email + "&" + "password=" + values.password
         ).then(function (response) {
             if (response.status === 200) {
                 console.log(response.data);
-                setRedirect(JSON.stringify(response.data));
-            }});
+                setRedirect(response.data);
+            }
+        });
     };
 
-    if (redirect==0) {return (
-        <Formiz
-            connect={myForm}
-            onValidSubmit={handleSubmit}
-        >
-            <form
-                noValidate
-                onSubmit={myForm.submit}
+    if (redirect == 0) {
+        return (
+            <Formiz
+                connect={myForm}
+                onValidSubmit={handleSubmit}
             >
-                <MyField
-                    name="email"
-                    label="E-mail: "
-                    validations={[
-                        {
-                            rule: isEmail(),
-                            message: 'This is not a valid email',
-                        },
-                    ]}
-                />
-                <MyField
-                    name="password"
-                    label="Password: "
-                    type="password"
-                />
-                <button
-                    type="submit"
-                    disabled={!myForm.isValid}
+                <form
+                    noValidate
+                    onSubmit={myForm.submit}
                 >
-                    Submit
-                </button>
-            </form>
-        </Formiz>
-    );} else return (
-        { redirect }
-    )
-    };
+                    <MyField
+                        name="email"
+                        label="E-mail: "
+                        validations={[
+                            {
+                                rule: isEmail(),
+                                message: 'This is not a valid email',
+                            },
+                        ]}
+                    />
+                    <MyField
+                        name="password"
+                        label="Password: "
+                        type="password"
+                    />
+                    <button
+                        type="submit"
+                        disabled={!myForm.isValid}
+                    >
+                        Submit
+                    </button>
+                </form>
+            </Formiz>
+        );
+    } else if (redirect == "success") {
+        return (<Redirect to='/success' />);
+    }
+};
