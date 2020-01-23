@@ -20,9 +20,17 @@ export const MyForm2 = () => {
         //WORKS:
         //curl -d username=user@user.com -d password=user -L http://localhost:8081
 
-        axios.post('http://localhost:8081',{
+        /*axios.post('http://localhost:8081',{
             username: values.email,
             password: values.password}).then(function (response) {
+            if (response.status === 200) {
+                console.log(response.data);
+                setRedirect(JSON.stringify(response.data));
+            }});*/
+
+        axios.post('http://localhost:8081',
+            "username="+values.email+"&"+"password="+values.password
+        ).then(function (response) {
             if (response.status === 200) {
                 console.log(response.data);
                 setRedirect(JSON.stringify(response.data));
