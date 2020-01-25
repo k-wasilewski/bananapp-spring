@@ -10,9 +10,9 @@ import java.security.Principal;
 @Controller
 public class AuthController {
 
-    @RequestMapping(value = "/auth/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/auth/ok", method = RequestMethod.GET)
     @ResponseBody
     public String currentUserName(Principal principal) {
-        return "only for logged users";
+        return "ok";
     }
 }
