@@ -1,25 +1,42 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Link, Redirect} from "react-router-dom";
 import './App.css';
 import axios from "axios";
 
-class Success extends React.Component {
+class Success extends Component {
 
-    state = {
-        username: 0,
-        status: false
+    constructor(){
+        super();
+        this.state = {
+            username: 0
+        }
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8081/auth/username')
+            .then((response) => {
+                let uname = response.data;
+                this.setState({
+                    username: uname
+                });
+            })
     }
 
     render() {
-        var $this = this;
-
-        axios.get('http://localhost:8081/auth/username')
-            .then(function (response) {
-                $this.setState({username: response.data});
-                if (response.status===200) $this.setState({status: true});
-            });
-
-        if (this.state.status) {
+        if (this.state.username===0) {
+            return (
+                <div className="App">
+                    <header className="App-header">
+                        <h3> Login failed, try again</h3>
+                        <Link to="/">
+                            <button variant="outlined">
+                                back
+                            </button>
+                        </Link>
+                    </header>
+                </div>
+            )
+        } else {
             return (
                 <div className="App">
                     <header className="App-header">
@@ -32,8 +49,6 @@ class Success extends React.Component {
                     </header>
                 </div>
             );
-        } else {
-            return (<Redirect to='/' />);
         }
     }
 }
