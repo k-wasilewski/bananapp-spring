@@ -10,6 +10,8 @@ import { useState } from 'react'
 //login
 export const MyForm2 = () => {
 
+    var bcrypt = require('bcryptjs');
+
     const myForm = useForm();
 
     const [redirect, setRedirect] = useState(0);
@@ -17,16 +19,10 @@ export const MyForm2 = () => {
     const handleSubmit = (values, event) => {
         console.log(values.email + ", " + values.password);
 
-        //WORKS:
         //curl -d username=user@user.com -d password=user -L http://localhost:8081
 
-        /*axios.post('http://localhost:8081',{
-            username: values.email,
-            password: values.password}).then(function (response) {
-            if (response.status === 200) {
-                console.log(response.data);
-                setRedirect(JSON.stringify(response.data));
-            }});*/
+        var hash = bcrypt.hashSync(values.password, 10);
+        console.log("hash: "+hash);
 
         axios.post('http://localhost:8081',
             "username=" + values.email + "&" + "password=" + values.password
@@ -74,5 +70,40 @@ export const MyForm2 = () => {
         );
     } else if (redirect == "success") {
         return (<Redirect to='/success' />);
+    } else {
+        return (
+            <Formiz
+                connect={myForm}
+                onValidSubmit={handleSubmit}
+            >
+                <form
+                    noValidate
+                    onSubmit={myForm.submit}
+                >
+                    Login failed
+                    <MyField
+                        name="email"
+                        label="E-mail: "
+                        validations={[
+                            {
+                                rule: isEmail(),
+                                message: 'This is not a valid email',
+                            },
+                        ]}
+                    />
+                    <MyField
+                        name="password"
+                        label="Password: "
+                        type="password"
+                    />
+                    <button
+                        type="submit"
+                        disabled={!myForm.isValid}
+                    >
+                        Submit
+                    </button>
+                </form>
+            </Formiz>
+        );
     }
 };
