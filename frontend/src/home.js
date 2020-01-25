@@ -151,7 +151,7 @@ class Home extends Component {
                 </header>
             </div>
         );
-        else if ($form3.state) {
+        else if (this.state.redirect) {
             return (
                 <Redirect to={{
                     pathname: '/results',
