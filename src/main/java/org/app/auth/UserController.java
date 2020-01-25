@@ -17,13 +17,19 @@ public class UserController {
         this.userService = userService;
     }*/
 
-    @GetMapping("/create-user")
-    public void createUser(@RequestParam String username,
-                             @RequestParam String password) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        userService.saveUser(user);
+    @PostMapping("/create-user")
+    @ResponseBody
+    public String createUser(@RequestParam("username") String username,
+                             @RequestParam("password") String password) {
+        try {
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(password);
+            userService.saveUser(user);
+        } catch (Exception e) {
+            return "fail";
+        }
+        return "success";
     }
 
     @GetMapping("/admin")
