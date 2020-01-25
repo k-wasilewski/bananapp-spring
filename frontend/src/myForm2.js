@@ -10,8 +10,6 @@ import { useState } from 'react'
 //login
 export const MyForm2 = () => {
 
-    var bcrypt = require('bcryptjs');
-
     const myForm = useForm();
 
     const [redirect, setRedirect] = useState(0);
@@ -20,9 +18,6 @@ export const MyForm2 = () => {
         console.log(values.email + ", " + values.password);
 
         //curl -d username=user@user.com -d password=user -L http://localhost:8081
-
-        var hash = bcrypt.hashSync(values.password, 10);
-        console.log("hash: "+hash);
 
         axios.post('http://localhost:8081',
             "username=" + values.email + "&" + "password=" + values.password

@@ -2,8 +2,7 @@ package org.app.auth;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
@@ -19,13 +18,12 @@ public class UserController {
     }*/
 
     @GetMapping("/create-user")
-    @ResponseBody
-    public String createUser() {
+    public void createUser(@RequestParam String username,
+                             @RequestParam String password) {
         User user = new User();
-        user.setUsername("user@user.com");
-        user.setPassword("user");
+        user.setUsername(username);
+        user.setPassword(password);
         userService.saveUser(user);
-        return "admin";
     }
 
     @GetMapping("/admin")
