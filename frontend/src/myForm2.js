@@ -27,6 +27,14 @@ export const MyForm2 = () => {
                 setRedirect(response.data);
             }
         });
+        axios.post('http://localhost:8082/auth/user',
+            "uname=" + values.email
+        ).then(function (response) {
+            if (response.status === 200) {
+                console.log(response.data);
+                setRedirect(response.data);
+            }
+        });
     };
 
     if (redirect == 0) {

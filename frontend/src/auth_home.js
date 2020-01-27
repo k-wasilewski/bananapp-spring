@@ -1,7 +1,18 @@
 import React from 'react';
 import axios from "axios";
+import {Redirect} from "react-router-dom";
 
 class Auth_home extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    state =  {
+        selectedFile: null,
+        imagePreviewUrl: null,
+        prediction: null,
+        redirect: false
+    };
 
     submit = () => {
 
@@ -34,7 +45,17 @@ class Auth_home extends React.Component {
             // event.total - total number of bytes (if lengthComputable)
             console.log(`Received ${event.loaded} of ${event.total}`);
         };
-        //request.open("POST", "https://us-central1-tutorial-e6ea7.cloudfunctions.net/fileUpload", true);
+
+        //curl -d "uname=kuba" -H "Content-Type: application/x-www-form-urlencoded" -X POST http://localhost:8082/auth/user
+        var requestUname = new XMLHttpRequest();
+        requestUname.open("POST", "http://localhost:8082/auth/user", true);
+        requestUname.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded8');
+        console.log("uname: "+this.props.username);
+        requestUname.send("uname="+this.props.username);
+
+        axios.post('http://localhost:8082/auth/user',
+            "uname="+this.props.username);
+
         request.open("POST", "http://localhost:8082/auth/image", true);
         request.send(fd);
     }
@@ -62,7 +83,7 @@ class Auth_home extends React.Component {
             $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
         }
 
-        return (
+        if (!this.state.redirect) return (
             <div>
                 <header>
                     <input type="file" name="avatar" onChange={this.fileChangedHandler} />
@@ -71,6 +92,13 @@ class Auth_home extends React.Component {
                 </header>
             </div>
         );
+        else return (
+            <Redirect to={{
+                pathname: '/auth/results',
+                state: { prediction: this.state.prediction,
+                    img: this.state.imagePreviewUrl}
+            }}/>
+        )
     }
 }
 

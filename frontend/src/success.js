@@ -48,6 +48,11 @@ class Success extends Component {
                                 back
                             </button>
                         </Link>
+                        <Link to="/auth/personalBananas">
+                            <button variant="outlined">
+                                personal bananas
+                            </button>
+                        </Link>
                     </header>
                 </div>
             );
