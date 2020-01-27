@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link, Redirect} from "react-router-dom";
 import './App.css';
 import axios from "axios";
+import Auth_home from './auth_home';
 
 class Success extends Component {
 
@@ -41,6 +42,7 @@ class Success extends Component {
                 <div className="App">
                     <header className="App-header">
                         <h3> Logged-in as { this.state.username }</h3>
+                        < Auth_home username={this.state.username}/>
                         <Link to="/">
                             <button variant="outlined">
                                 back
