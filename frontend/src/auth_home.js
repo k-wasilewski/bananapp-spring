@@ -47,16 +47,16 @@ class Auth_home extends React.Component {
         };
 
         //curl -d "uname=kuba" -H "Content-Type: application/x-www-form-urlencoded" -X POST http://localhost:8082/auth/user
-        var requestUname = new XMLHttpRequest();
-        requestUname.open("POST", "http://localhost:8082/auth/user", true);
-        requestUname.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded8');
-        console.log("uname: "+this.props.username);
-        requestUname.send("uname="+this.props.username);
+        //var requestUname = new XMLHttpRequest();
+        //requestUname.open("POST", "http://localhost:8082/auth/user", true);
+        //requestUname.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded8');
+        //console.log("uname: "+this.props.username);
+        //requestUname.send("uname="+this.props.username);
 
-        axios.post('http://localhost:8082/auth/user',
-            "uname="+this.props.username);
+        //axios.post('http://localhost:8082/auth/user',
+        //    "uname="+this.props.username);
 
-        request.open("POST", "http://localhost:8082/auth/image", true);
+        request.open("POST", "http://localhost:8082/auth/image?uname="+this.props.username, true);
         request.send(fd);
     }
 
