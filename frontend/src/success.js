@@ -24,6 +24,8 @@ class Success extends Component {
     }
 
     render() {
+        var $this = this;
+
         if (this.state.username===0) {
             return (
                 <div className="App">
@@ -48,7 +50,12 @@ class Success extends Component {
                                 back
                             </button>
                         </Link>
-                        <Link to="/auth/personalBananas">
+                        <Link to={{
+                            pathname: "/auth/personalBananas",
+                            state: {
+                                username: $this.state.username
+                            }
+                        }}>
                             <button variant="outlined">
                                 personal bananas
                             </button>
