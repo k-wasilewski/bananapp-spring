@@ -8,7 +8,8 @@ class PersonalBananas extends React.Component {
     constructor(){
         super();
         this.state = {
-            username: 0
+            username: 0,
+            images: 0
         }
     }
 
@@ -20,26 +21,18 @@ class PersonalBananas extends React.Component {
                     username: uname
                 });
             })
+        axios.get('http://localhost:8081/auth/files')
+            .then((response) => {
+                let imgs = response.data;
+                console.log("images: "+imgs);
+                this.setState({
+                    images: imgs
+                });
+            })
     }
 
     render() {
-        if (this.state.username===0) {
-            return (
-                <div className="App">
-                    <header className="App-header">
-                        <div>personal bananas of [not known]</div>
-                    </header>
-                </div>
-            )
-        } else {
-            return (
-                <div className="App">
-                    <header className="App-header">
-                        <div>personal bananas of {this.state.username}</div>
-                    </header>
-                </div>
-            )
-        }
+
     }
 }
 
