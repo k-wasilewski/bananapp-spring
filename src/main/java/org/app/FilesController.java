@@ -16,15 +16,16 @@ public class FilesController {
     @RequestMapping(value = "/auth/files", method = RequestMethod.GET)
     @ResponseBody
     public List<String> files(Principal principal) {
-        File folder = new File("/home/kuba/Desktop/CodersLab/bananapp-264116"+
-                File.separator+principal.getName());
+        File folder = new File("/home/kuba/Desktop/CodersLab/spring-and-react/target/classes/public/auth/"
+                +principal.getName());
         File[] listOfFiles = folder.listFiles();
 
         List<String> list = new ArrayList<>();
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile()) {
                 System.out.println("File " + listOfFiles[i].getName());
-                list.add("\""+listOfFiles[i].toString()+"\"");
+                //list.add(listOfFiles[i].toString());
+                list.add("auth/"+principal.getName()+"/"+listOfFiles[i].getName());
             }
         }
         return list;

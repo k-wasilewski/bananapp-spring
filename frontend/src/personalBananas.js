@@ -33,12 +33,15 @@ class PersonalBananas extends React.Component {
 
     render() {
         var $this = this;
+        //img src={people[i]} works
+
 
         const people = this.state.images;
         let peopleToReturn = [];
         const peopleLis = () => {
             for (let i = 0; i < people.length; i++) {
-                peopleToReturn.push(<li> <img src={people[i]} /> </li>);
+                var path = people[i];
+                peopleToReturn.push(<li> <img src={process.env.PUBLIC_URL +`/${path}`}></img> </li>);
             }
             return peopleToReturn;
         };
