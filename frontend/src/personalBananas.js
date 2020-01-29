@@ -24,7 +24,7 @@ class PersonalBananas extends React.Component {
         axios.get('http://localhost:8081/auth/files')
             .then((response) => {
                 let imgs = response.data;
-                console.log("images: "+imgs);
+                console.log("images response: "+imgs);
                 this.setState({
                     images: imgs
                 });
@@ -32,7 +32,23 @@ class PersonalBananas extends React.Component {
     }
 
     render() {
+        var $this = this;
 
+        const people = this.state.images;
+        let peopleToReturn = [];
+        const peopleLis = () => {
+            for (let i = 0; i < people.length; i++) {
+                peopleToReturn.push(<li> <img src={people[i]} /> </li>);
+            }
+            return peopleToReturn;
+        };
+
+        return (
+            <div>
+                <ul>{peopleLis()}</ul>
+                {$this.state.images[0]}
+            </div>
+        )
     }
 }
 

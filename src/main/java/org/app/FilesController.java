@@ -24,7 +24,7 @@ public class FilesController {
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile()) {
                 System.out.println("File " + listOfFiles[i].getName());
-                list.add("'"+listOfFiles[i].toString()+"'");
+                list.add("\""+listOfFiles[i].toString()+"\"");
             }
         }
         return list;
