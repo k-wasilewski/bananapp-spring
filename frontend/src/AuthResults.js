@@ -1,8 +1,20 @@
 import React from 'react';
 import {Link, Redirect} from "react-router-dom";
 import './App.css';
+import axios from "axios";
 
 class AuthResults extends React.Component {
+
+    saveimg = (score, acc, filename) => {
+        axios.post('http://localhost:8081/auth/saveimg',
+            "filename=" + filename[1] + "&"
+            + "score=" + score[1] + "&" + "acc=" +acc[1]
+        ).then(function (response) {
+            if (response.status === 200) {
+                console.log("response at front (sent to save): " + response.data);
+            }
+        });
+    }
 
     render() {
         const img = this.props.location.state.img;
@@ -12,9 +24,13 @@ class AuthResults extends React.Component {
 
         const scoreRegex = /score:(.*?),/;
         const accRegex = /accuracy:(0\.\d\d)/;
+        const filenameRegex = /filename:(.*?)END/
 
         const score = scoreRegex.exec(prediction);
         const accuracy = accRegex.exec(prediction);
+        const filename = filenameRegex.exec(prediction);
+
+        this.saveimg(score, accuracy, filename);
 
         var days = '[error]';
         if (score[1]==1.0) days="1 day";
