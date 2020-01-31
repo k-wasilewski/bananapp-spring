@@ -2,6 +2,7 @@ import React from 'react';
 import {MyField} from "./myField";
 import {isEmail} from "@formiz/validations";
 import axios from "axios";
+import Gallery from 'react-grid-gallery';
 
 class PersonalBananas extends React.Component {
 
@@ -58,6 +59,7 @@ class PersonalBananas extends React.Component {
     render() {
         var $this = this;
         //img src={people[i]} works
+        const IMAGES = [];
 
 
         const people = this.state.images;
@@ -67,15 +69,21 @@ class PersonalBananas extends React.Component {
                 var path = people[i]
                 this.getImgPred(path);
                 console.log("pred:"+$this.state.pred);
-                peopleToReturn.push(<li> <img src={process.env.PUBLIC_URL +`/${path}`}></img><br/>
-                    {$this.state.pred}</li>);
+
+                IMAGES.push({
+                    src: process.env.PUBLIC_URL +`/${path}`,
+                    thumbnail: process.env.PUBLIC_URL +`/${path}`,
+                    thumbnailWidth: 320,
+                    thumbnailHeight: 320,
+                    caption: $this.state.pred
+                })
             }
-            return peopleToReturn;
+            return IMAGES;
         };
 
         return (
             <div>
-                <ul>{peopleLis()}</ul>
+                <Gallery images={peopleLis()}/>
             </div>
         )
     }
