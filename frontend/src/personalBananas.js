@@ -9,7 +9,8 @@ class PersonalBananas extends React.Component {
         super();
         this.state = {
             username: 0,
-            images: 0
+            images: 0,
+            pred: 0
         }
     }
 
@@ -31,6 +32,29 @@ class PersonalBananas extends React.Component {
             })
     }
 
+    getImgPred = (path) => {
+        var username = this.state.username;
+        var $this = this;
+
+        let regex = new RegExp(username+'\/(.*?)$');
+        let imgRegex= /{username}\/(.*?)$/;
+
+        let filename = regex.exec(path);
+        console.log("filename at front:"+filename[1]);
+        console.log("regex1:"+imgRegex+", regex2:"+regex);
+
+        axios.post('http://localhost:8081/auth/imgpred',
+            "filename=" + filename[1]
+        ).then(function (response) {
+            console.log("response at front (get img prediction):"+response.data);
+            if (response.status === 200) {
+                $this.setState({
+                    pred: response.data
+                });
+            }
+        });
+    }
+
     render() {
         var $this = this;
         //img src={people[i]} works
@@ -40,8 +64,11 @@ class PersonalBananas extends React.Component {
         let peopleToReturn = [];
         const peopleLis = () => {
             for (let i = 0; i < people.length; i++) {
-                var path = people[i];
-                peopleToReturn.push(<li> <img src={process.env.PUBLIC_URL +`/${path}`}></img> </li>);
+                var path = people[i]
+                this.getImgPred(path);
+                console.log("pred:"+$this.state.pred);
+                peopleToReturn.push(<li> <img src={process.env.PUBLIC_URL +`/${path}`}></img><br/>
+                    {$this.state.pred}</li>);
             }
             return peopleToReturn;
         };
@@ -49,7 +76,6 @@ class PersonalBananas extends React.Component {
         return (
             <div>
                 <ul>{peopleLis()}</ul>
-                {$this.state.images[0]}
             </div>
         )
     }
