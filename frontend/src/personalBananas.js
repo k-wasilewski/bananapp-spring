@@ -58,9 +58,24 @@ class PersonalBananas extends React.Component {
             if (response.status === 200) {
                 $this.setState({
                     pred: response.data
-                });
+                }, function() { $this.IMAGESpush(path) } );
             }
         });
+    }
+
+    IMAGESpush = (path) => {
+        var $this = this;
+        const IMAGES = [];
+        IMAGES.push({
+            src: process.env.PUBLIC_URL +`/${path}`,
+            thumbnail: process.env.PUBLIC_URL +`/${path}`,
+            thumbnailWidth: 320,
+            thumbnailHeight: 320,
+            caption: $this.state.pred
+        })
+        this.setState({
+            IMAGES: IMAGES
+        })
     }
 
     imgList = () => {
@@ -73,18 +88,7 @@ class PersonalBananas extends React.Component {
             var path = imgpaths[i]
             this.getImgPred(path);
             console.log("pred:"+$this.state.pred);
-
-            IMAGES.push({
-                src: process.env.PUBLIC_URL +`/${path}`,
-                thumbnail: process.env.PUBLIC_URL +`/${path}`,
-                thumbnailWidth: 320,
-                thumbnailHeight: 320,
-                caption: $this.state.pred
-            })
         }
-        this.setState({
-            IMAGES: IMAGES
-        })
         console.log("IMAGES from imgLis():"+IMAGES);
     };
 
