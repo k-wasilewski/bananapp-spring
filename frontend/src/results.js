@@ -30,7 +30,7 @@ class Results extends React.Component {
                 <header className="App-header">
                     <img src={img} style={{maxHeight: "500px"}} />
                     <h3> Your banana is { days } old, </h3>
-                    <h3> with { accuracy[1]*100 }% certainty</h3>
+                    <h3> with { Number((accuracy[1]*100).toFixed(2)) }% certainty</h3>
                     <Link to="/">
                         <button variant="outlined">
                             back
