@@ -11,11 +11,15 @@ class PersonalBananas extends React.Component {
         this.state = {
             username: 0,
             images: 0,
-            pred: 0
+            pred: 0,
+            IMAGES: 0
         }
+        this.imgList = this.imgList.bind(this)
     }
 
     componentDidMount() {
+        let $this = this;
+
         axios.get('http://localhost:8081/auth/username')
             .then((response) => {
                 let uname = response.data;
@@ -23,13 +27,16 @@ class PersonalBananas extends React.Component {
                     username: uname
                 });
             })
+
         axios.get('http://localhost:8081/auth/files')
             .then((response) => {
                 let imgs = response.data;
                 console.log("images response: "+imgs);
                 this.setState({
                     images: imgs
-                });
+                },
+                    function() { $this.imgList() }
+                );
             })
     }
 
@@ -56,34 +63,36 @@ class PersonalBananas extends React.Component {
         });
     }
 
-    render() {
+    imgList = () => {
         var $this = this;
-        //img src={people[i]} works
         const IMAGES = [];
+        const imgpaths = this.state.images;
+        console.log("images from imgLis():"+imgpaths);
 
+        for (let i = 0; i < imgpaths.length; i++) {
+            var path = imgpaths[i]
+            this.getImgPred(path);
+            console.log("pred:"+$this.state.pred);
 
-        const people = this.state.images;
-        let peopleToReturn = [];
-        const peopleLis = () => {
-            for (let i = 0; i < people.length; i++) {
-                var path = people[i]
-                this.getImgPred(path);
-                console.log("pred:"+$this.state.pred);
+            IMAGES.push({
+                src: process.env.PUBLIC_URL +`/${path}`,
+                thumbnail: process.env.PUBLIC_URL +`/${path}`,
+                thumbnailWidth: 320,
+                thumbnailHeight: 320,
+                caption: $this.state.pred
+            })
+        }
+        this.setState({
+            IMAGES: IMAGES
+        })
+        console.log("IMAGES from imgLis():"+IMAGES);
+    };
 
-                IMAGES.push({
-                    src: process.env.PUBLIC_URL +`/${path}`,
-                    thumbnail: process.env.PUBLIC_URL +`/${path}`,
-                    thumbnailWidth: 320,
-                    thumbnailHeight: 320,
-                    caption: $this.state.pred
-                })
-            }
-            return IMAGES;
-        };
+    render() {
 
         return (
             <div>
-                <Gallery images={peopleLis()}/>
+                <Gallery images={this.state.IMAGES}/>
             </div>
         )
     }
