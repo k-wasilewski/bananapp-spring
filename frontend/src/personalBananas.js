@@ -57,8 +57,25 @@ class PersonalBananas extends React.Component {
         ).then(function (response) {
             console.log("response at front (get img prediction):"+response.data);
             if (response.status === 200) {
+                const prediction = response.data;
+
+                const scoreRegex = /score:(.*?),/;
+                const accRegex = /acc:(0\.\d\d)/;
+
+                const score = scoreRegex.exec(prediction);
+                const accuracy = accRegex.exec(prediction);
+
+                var days = '[error]';
+                if (score[1]==1.0) days="1 day";
+                else if (score[1]==2.0) days="2 days";
+                else if (score[1]==3.0) days="3 days";
+                else if (score[1]==4.0) days="4 days";
+                else if (score[1]==5.0) days="5 days";
+                else if (score[1]==6.0) days="6 days";
+                else if (score[1]==7.0) days="7 days";
+
                 $this.setState({
-                    pred: response.data
+                    pred: days+" for "+Number((accuracy[1]*100).toFixed(2)) +"%"
                 }, function() { $this.IMAGESpush(path) } );
             }
         });
@@ -69,9 +86,8 @@ class PersonalBananas extends React.Component {
         const newIMAGE = {
             src: process.env.PUBLIC_URL +`/${path}`,
             thumbnail: process.env.PUBLIC_URL +`/${path}`,
-            thumbnailWidth: 320,
-            thumbnailHeight: 320,
-            caption: $this.state.pred
+            caption: $this.state.pred,
+            tags: [{value: $this.state.pred, title: $this.state.pred}]
         };
         this.setState({IMAGES: this.state.IMAGES.concat(newIMAGE)});
     }
@@ -94,7 +110,7 @@ class PersonalBananas extends React.Component {
 
         return (
             <div className="App">
-                <Gallery images={this.state.IMAGES}/>
+                <Gallery images={this.state.IMAGES} />
                 <header className="App-header">
                     <Link to="/success">
                         <button variant="outlined">
