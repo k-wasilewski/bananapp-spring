@@ -12,7 +12,7 @@ class PersonalBananas extends React.Component {
             username: 0,
             images: 0,
             pred: 0,
-            IMAGES: 0
+            IMAGES: []
         }
         this.imgList = this.imgList.bind(this)
     }
@@ -33,8 +33,8 @@ class PersonalBananas extends React.Component {
                 let imgs = response.data;
                 console.log("images response: "+imgs);
                 this.setState({
-                    images: imgs
-                },
+                        images: imgs
+                    },
                     function() { $this.imgList() }
                 );
             })
@@ -65,17 +65,14 @@ class PersonalBananas extends React.Component {
 
     IMAGESpush = (path) => {
         var $this = this;
-        const IMAGES = [];
-        IMAGES.push({
+        const newIMAGE = {
             src: process.env.PUBLIC_URL +`/${path}`,
             thumbnail: process.env.PUBLIC_URL +`/${path}`,
             thumbnailWidth: 320,
             thumbnailHeight: 320,
             caption: $this.state.pred
-        })
-        this.setState({
-            IMAGES: IMAGES
-        })
+        };
+        this.setState({IMAGES: this.state.IMAGES.concat(newIMAGE)});
     }
 
     imgList = () => {
