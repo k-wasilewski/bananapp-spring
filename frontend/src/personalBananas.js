@@ -110,15 +110,21 @@ class PersonalBananas extends React.Component {
 
         return (
             <div className="App">
-                <Gallery images={this.state.IMAGES} />
-                <header className="App-header">
-                    <Link to="/success">
-                        <button variant="outlined">
-                            back
-                        </button>
-                    </Link>
-                </header>
-            </div>
+                <div style={{
+                    display: "block",
+                    minHeight: "1px",
+                    width: "100%",
+                    overflow: "auto"}}>
+                    <Gallery images={this.state.IMAGES} />
+                </div>
+                    <div className="App-header">
+                        <Link to="/success">
+                            <button variant="outlined">
+                                back
+                            </button>
+                        </Link>
+                    </div>
+                </div>
         )
     }
 }
