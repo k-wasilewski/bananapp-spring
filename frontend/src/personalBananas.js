@@ -3,6 +3,7 @@ import {MyField} from "./myField";
 import {isEmail} from "@formiz/validations";
 import axios from "axios";
 import Gallery from 'react-grid-gallery';
+import {Link} from "react-router-dom";
 
 class PersonalBananas extends React.Component {
 
@@ -92,8 +93,15 @@ class PersonalBananas extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className="App">
                 <Gallery images={this.state.IMAGES}/>
+                <header className="App-header">
+                    <Link to="/success">
+                        <button variant="outlined">
+                            back
+                        </button>
+                    </Link>
+                </header>
             </div>
         )
     }
