@@ -111,7 +111,7 @@ class Auth_personalBananas extends React.Component {
                     <div className="App-header">
                         <Link to="/success">
                             <button variant="outlined">
-                                back
+                                Back
                             </button>
                         </Link>
                     </div>

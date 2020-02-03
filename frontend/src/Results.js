@@ -21,10 +21,10 @@ class Results extends React.Component {
             return (
                 <div className="App">
                     <header className="App-header">
-                        <h3>file already exists or file type not supported, try again</h3>
+                        <h3>File already exists or file type not supported, try again</h3>
                         <Link to="/">
                             <button variant="outlined">
-                                back
+                                Back
                             </button>
                         </Link>
                     </header>
@@ -47,7 +47,7 @@ class Results extends React.Component {
                         <h3> with { Number((accuracy[1]*100).toFixed(2)) }% certainty</h3>
                         <Link to="/">
                             <button variant="outlined">
-                                back
+                                Back
                             </button>
                         </Link>
                     </header>

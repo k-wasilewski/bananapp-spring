@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
+import logo from './logo0.jpg';
+import logo_title from './logotitle.jpg';
 import './App.css';
 import {Redirect} from 'react-router-dom';
 import {Form_register} from "./Form_register";
@@ -63,16 +64,8 @@ class Home extends Component {
         request.send(fd);
     }
 
-    hello = () => {
-        fetch('/api/hello')
-            .then(response => response.text())
-            .then(message => {
-                this.setState({message: message});
-            });
-    };
-
     render() {
-        let $imagePreview = (<div className="previewText image-container">Please select an Image for Preview</div>);
+        let $imagePreview = (<div className="previewText image-container">Please select an image</div>);
         if (this.state.imagePreviewUrl) {
             $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
         }
@@ -90,11 +83,14 @@ class Home extends Component {
         if ( this.state.login ) {
             form_login = (<Form_login/>)
         } else form_login = (<div />)
+
         if (!this.state.redirect) return (
             <div className="App">
                 <header className="App-header">
+                    <div className="App-break"/>
                     <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">{this.state.message}</h1>
+                    <div className="App-break"/>
+                    <img src={logo_title} />
                         <button variant="outlined" onClick={this.do_register}>
                             Register
                         </button>

@@ -16,7 +16,6 @@ export const Form_register = () => {
             "username=" + values.email + "&" + "password=" + values.password
         ).then(function (response) {
             if (response.status === 200) {
-                console.log(response.data);
                 setRedirect(response.data);
             }
         });

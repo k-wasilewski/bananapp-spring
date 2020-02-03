@@ -33,7 +33,7 @@ class Success extends Component {
                         <h3> Login failed, try again</h3>
                         <Link to="/">
                             <button variant="outlined">
-                                back
+                                Back
                             </button>
                         </Link>
                     </header>
@@ -47,7 +47,7 @@ class Success extends Component {
                         < Auth_home username={this.state.username}/>
                         <Link to="/">
                             <button variant="outlined">
-                                back
+                                Back
                             </button>
                         </Link>
                         <Link to={{
@@ -57,7 +57,7 @@ class Success extends Component {
                             }
                         }}>
                             <button variant="outlined">
-                                personal bananas
+                                Personal bananas
                             </button>
                         </Link>
                     </header>
