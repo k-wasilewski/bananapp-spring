@@ -2,7 +2,6 @@ package org.app.auth;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +18,6 @@ public class ImageController {
                             @RequestParam("score") String score,
                             @RequestParam("acc") String acc) {
         try {
-            System.out.println(filename+": "+score+", "+acc);
             Image img = new Image();
             img.setFilename(filename);
             img.setScore(score);
@@ -27,7 +25,6 @@ public class ImageController {
             imageService.saveImage(img);
             return "saved at backend";
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return "failed saving at backend";
         }
     }
@@ -36,11 +33,8 @@ public class ImageController {
     @ResponseBody
     public String getImgPrediction(@RequestParam("filename") String filename) {
         try {
-            System.out.println("received img:"+filename);
-            System.out.println("response prediction:"+imageService.getPrediction(filename));
             return imageService.getPrediction(filename);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return "failed";
         }
     }

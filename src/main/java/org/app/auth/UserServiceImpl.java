@@ -25,24 +25,6 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
     }
 
-    /*public UserServiceImpl() {
-        this.setPasswordEncoder(passwordEncoder);
-        this.setUserRepository(userRepository);
-        this.setRoleRepository(roleRepository);
-    }
-
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public void setRoleRepository(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
-
-    public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }*/
-
     @Override
     public User findByUserName(String username) {
         return userRepository.findByUsername(username);

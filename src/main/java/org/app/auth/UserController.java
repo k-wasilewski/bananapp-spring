@@ -13,10 +13,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    /*public void setUserService(UserService userService) {
-        this.userService = userService;
-    }*/
-
     @PostMapping("/create-user")
     @ResponseBody
     public String createUser(@RequestParam("username") String username,

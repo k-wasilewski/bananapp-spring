@@ -1,6 +1,4 @@
 import React from 'react';
-import {MyField} from "./myField";
-import {isEmail} from "@formiz/validations";
 import axios from "axios";
 import Gallery from 'react-grid-gallery';
 import {Link} from "react-router-dom";
@@ -32,7 +30,6 @@ class PersonalBananas extends React.Component {
         axios.get('http://localhost:8081/auth/files')
             .then((response) => {
                 let imgs = response.data;
-                console.log("images response: "+imgs);
                 this.setState({
                         images: imgs
                     },
@@ -49,13 +46,10 @@ class PersonalBananas extends React.Component {
         let imgRegex= /{username}\/(.*?)$/;
 
         let filename = regex.exec(path);
-        console.log("filename at front:"+filename[1]);
-        console.log("regex1:"+imgRegex+", regex2:"+regex);
 
         axios.post('http://localhost:8081/auth/imgpred',
             "filename=" + filename[1]
         ).then(function (response) {
-            console.log("response at front (get img prediction):"+response.data);
             if (response.status === 200) {
                 const prediction = response.data;
 
@@ -96,14 +90,11 @@ class PersonalBananas extends React.Component {
         var $this = this;
         const IMAGES = [];
         const imgpaths = this.state.images;
-        console.log("images from imgLis():"+imgpaths);
 
         for (let i = 0; i < imgpaths.length; i++) {
             var path = imgpaths[i]
             this.getImgPred(path);
-            console.log("pred:"+$this.state.pred);
         }
-        console.log("IMAGES from imgLis():"+IMAGES);
     };
 
     render() {

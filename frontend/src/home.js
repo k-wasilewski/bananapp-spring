@@ -1,18 +1,9 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {
-    BrowserRouter as Router,
-    Link,
-    Redirect
-} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {MyForm} from "./myForm";
 import {MyForm2} from "./myForm2";
-import NameForm from "./nameForm";
-import {MyField} from "./myField";
-import {isEmail} from "@formiz/validations";
-import {Formiz, useForm} from "@formiz/core";
-import axios from "axios";
 
 class Home extends Component {
 
@@ -54,42 +45,22 @@ class Home extends Component {
 
     submit = () => {
 
-        console.log("post sent from frontend8081");
-
         var fd = new FormData();
 
         fd.append('file', this.state.selectedFile);
 
         var request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if (this.status === 200) {
-                console.log("at home: "+this.status+" "+this.statusText);
-            }
-        };
+
         var $this = this;
         request.onload = function() {
-            console.log(`Response: ${request.response}`);
             $this.setState({
                 prediction: request.response,
                 redirect: true
             });
         };
-        request.onerror = function() { // only triggers if the request couldn't be made at all
-            console.log(`Network Error`);
-        };
-        request.onprogress = function(event) { // triggers periodically
-                                           // event.loaded - how many bytes downloaded
-                                           // event.lengthComputable = true if the server sent Content-Length header
-                                           // event.total - total number of bytes (if lengthComputable)
-            console.log(`Received ${event.loaded} of ${event.total}`);
-        };
-        //request.open("POST", "https://us-central1-tutorial-e6ea7.cloudfunctions.net/fileUpload", true);
+
         request.open("POST", "http://localhost:8082/image", true);
         request.send(fd);
-    }
-
-    componentDidMount() {
-        //setInterval(this.hello, 250);
     }
 
     hello = () => {
@@ -107,7 +78,6 @@ class Home extends Component {
         }
         let $form2;
         if ( this.state.login2 ) {
-            console.log("login2 rendered");
             $form2 = (
                 <div>
                     <MyForm />
@@ -118,18 +88,12 @@ class Home extends Component {
 
         if ( this.state.login3 ) {
             $form3 = (<MyForm2/>)
-            //$form3 = < NameForm />
         } else $form3 = (<div />)
         if (!this.state.redirect) return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">{this.state.message}</h1>
-                    <Link to="/login1">
-                        <button variant="outlined">
-                            Log-in to your account1
-                        </button>
-                    </Link>
                         <button variant="outlined" onClick={this.login2}>
                             Register
                         </button>
@@ -138,13 +102,6 @@ class Home extends Component {
                         Log-in
                     </button>
                     { $form3 }
-                    <Router>
-                        <a href={'http://localhost:8082/hello'}>
-                            <button variant="outlined">
-                                Google App
-                            </button>
-                        </a>
-                    </Router>
                     <input type="file" name="avatar" onChange={this.fileChangedHandler} />
                     <button type="button" onClick={this.submit} > Upload </button>
                     { $imagePreview }

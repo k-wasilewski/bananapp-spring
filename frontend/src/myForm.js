@@ -5,21 +5,13 @@ import { MyField } from './myField' // Import your field
 import axios from "axios";
 import { useState } from 'react'
 
-//register
+//REGISTER
+
 export const MyForm = () => {
     const myForm = useForm();
     const [redirect, setRedirect] = useState(0);
 
     const handleSubmit = (values) => {
-        /*axios.get('http://localhost:8081/create-user?username='
-            + values.email + "&" + "password=" + values.password
-        ).then(function (response) {
-            if (response.status === 200) {
-                console.log(response.data);
-                setRedirect(response.data);
-            }
-        });*/
-
         axios.post('http://localhost:8081/create-user',
             "username=" + values.email + "&" + "password=" + values.password
         ).then(function (response) {
@@ -29,6 +21,7 @@ export const MyForm = () => {
             }
         });
     };
+
     if (redirect == 0) {
         return (
             <Formiz

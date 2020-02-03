@@ -1,7 +1,5 @@
 package org.app.auth;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import javax.persistence.*;
 
 @Entity

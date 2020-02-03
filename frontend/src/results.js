@@ -8,7 +8,6 @@ class Results extends React.Component {
         const img = this.props.location.state.img;
 
         const prediction = this.props.location.state.prediction;
-        console.log("prediction at front: "+prediction);
 
         const scoreRegex = /score:(.*?),/;
         const accRegex = /accuracy:(0\.\d\d)/;
@@ -22,7 +21,7 @@ class Results extends React.Component {
             return (
                 <div className="App">
                     <header className="App-header">
-                        <h3>file already exists, change the filename and try again</h3>
+                        <h3>file already exists or file type not supported, try again</h3>
                         <Link to="/">
                             <button variant="outlined">
                                 back

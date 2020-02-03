@@ -9,18 +9,12 @@ class AuthResults extends React.Component {
         axios.post('http://localhost:8081/auth/saveimg',
             "filename=" + filename[1] + "&"
             + "score=" + score[1] + "&" + "acc=" +acc[1]
-        ).then(function (response) {
-            if (response.status === 200) {
-                console.log("response at front (sent to save): " + response.data);
-            }
-        });
-    }
+        )};
+
 
     render() {
         const img = this.props.location.state.img;
-
         const prediction = this.props.location.state.prediction;
-        console.log("prediction at front: "+prediction);
 
         const scoreRegex = /score:(.*?),/;
         const accRegex = /accuracy:(0\.\d\d)/;
@@ -36,7 +30,7 @@ class AuthResults extends React.Component {
             return (
                 <div className="App">
                     <header className="App-header">
-                        <h3>file already exists, change the filename and try again</h3>
+                        <h3>file already exists or file type not supported, try again</h3>
                         <Link to="/">
                             <button variant="outlined">
                                 back

@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from "axios";
 import {Redirect} from "react-router-dom";
 
 class Auth_home extends React.Component {
@@ -16,45 +15,19 @@ class Auth_home extends React.Component {
 
     submit = () => {
 
-        console.log("post sent from frontend8081");
-
         var fd = new FormData();
 
         fd.append('file', this.state.selectedFile);
 
         var request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if (this.status === 200) {
-                console.log("at home: "+this.status+" "+this.statusText);
-            }
-        };
+
         var $this = this;
         request.onload = function() {
-            console.log(`Response: ${request.response}`);
             $this.setState({
                 prediction: request.response,
                 redirect: true
             });
         };
-        request.onerror = function() { // only triggers if the request couldn't be made at all
-            console.log(`Network Error`);
-        };
-        request.onprogress = function(event) { // triggers periodically
-            // event.loaded - how many bytes downloaded
-            // event.lengthComputable = true if the server sent Content-Length header
-            // event.total - total number of bytes (if lengthComputable)
-            console.log(`Received ${event.loaded} of ${event.total}`);
-        };
-
-        //curl -d "uname=kuba" -H "Content-Type: application/x-www-form-urlencoded" -X POST http://localhost:8082/auth/user
-        //var requestUname = new XMLHttpRequest();
-        //requestUname.open("POST", "http://localhost:8082/auth/user", true);
-        //requestUname.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded8');
-        //console.log("uname: "+this.props.username);
-        //requestUname.send("uname="+this.props.username);
-
-        //axios.post('http://localhost:8082/auth/user',
-        //    "uname="+this.props.username);
 
         request.open("POST", "http://localhost:8082/auth/image?uname="+this.props.username, true);
         request.send(fd);

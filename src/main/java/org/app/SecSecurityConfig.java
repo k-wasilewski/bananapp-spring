@@ -22,8 +22,6 @@ public class SecSecurityConfig
     @Autowired
     private SpringDataUserDetailsService customUserDetailsService;
 
-    //...
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()

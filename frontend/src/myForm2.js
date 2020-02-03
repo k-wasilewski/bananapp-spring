@@ -1,13 +1,13 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { Formiz, useForm } from '@formiz/core'
 import { isEmail } from '@formiz/validations' // Import some validations
 import { MyField } from './myField'
 import axios from "axios";
-import {Link, Redirect} from "react-router-dom";
-import Home from "./home";
+import {Redirect} from "react-router-dom";
 import { useState } from 'react'
 
-//login
+//LOGIN
+
 export const MyForm2 = () => {
 
     const myForm = useForm();
@@ -15,15 +15,10 @@ export const MyForm2 = () => {
     const [redirect, setRedirect] = useState(0);
 
     const handleSubmit = (values, event) => {
-        console.log(values.email + ", " + values.password);
-
-        //curl -d username=user@user.com -d password=user -L http://localhost:8081
-
         axios.post('http://localhost:8081',
             "username=" + values.email + "&" + "password=" + values.password
         ).then(function (response) {
             if (response.status === 200) {
-                console.log(response.data);
                 setRedirect(response.data);
             }
         });
@@ -31,7 +26,6 @@ export const MyForm2 = () => {
             "uname=" + values.email
         ).then(function (response) {
             if (response.status === 200) {
-                console.log(response.data);
                 setRedirect(response.data);
             }
         });
