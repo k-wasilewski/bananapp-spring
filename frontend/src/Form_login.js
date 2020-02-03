@@ -1,14 +1,14 @@
 import React from 'react'
 import { Formiz, useForm } from '@formiz/core'
 import { isEmail } from '@formiz/validations' // Import some validations
-import { MyField } from './myField'
+import { Form_field } from './Form_field'
 import axios from "axios";
 import {Redirect} from "react-router-dom";
 import { useState } from 'react'
 
 //LOGIN
 
-export const MyForm2 = () => {
+export const Form_login = () => {
 
     const myForm = useForm();
 
@@ -41,7 +41,7 @@ export const MyForm2 = () => {
                     noValidate
                     onSubmit={myForm.submit}
                 >
-                    <MyField
+                    <Form_field
                         name="email"
                         label="E-mail: "
                         validations={[
@@ -51,7 +51,7 @@ export const MyForm2 = () => {
                             },
                         ]}
                     />
-                    <MyField
+                    <Form_field
                         name="password"
                         label="Password: "
                         type="password"
@@ -78,7 +78,7 @@ export const MyForm2 = () => {
                     onSubmit={myForm.submit}
                 >
                     Login failed
-                    <MyField
+                    <Form_field
                         name="email"
                         label="E-mail: "
                         validations={[
@@ -88,7 +88,7 @@ export const MyForm2 = () => {
                             },
                         ]}
                     />
-                    <MyField
+                    <Form_field
                         name="password"
                         label="Password: "
                         type="password"

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Formiz, useForm } from '@formiz/core'
 import { isEmail } from '@formiz/validations' // Import some validations
-import { MyField } from './myField' // Import your field
+import { Form_field } from './Form_field' // Import your field
 import axios from "axios";
 import { useState } from 'react'
 
 //REGISTER
 
-export const MyForm = () => {
+export const Form_register = () => {
     const myForm = useForm();
     const [redirect, setRedirect] = useState(0);
 
@@ -32,7 +32,7 @@ export const MyForm = () => {
                     noValidate
                     onSubmit={myForm.submit}
                 >
-                    <MyField
+                    <Form_field
                         name="email"
                         label="E-mail: "
                         validations={[
@@ -42,12 +42,12 @@ export const MyForm = () => {
                             },
                         ]}
                     />
-                    <MyField
+                    <Form_field
                         name="password"
                         label="Password: "
                         type="password"
                     />
-                    <MyField
+                    <Form_field
                         name="passwordConfirm"
                         label="Confirm password: "
                         type="password"
@@ -79,7 +79,7 @@ export const MyForm = () => {
                     noValidate
                     onSubmit={myForm.submit}
                 >
-                    <MyField
+                    <Form_field
                         name="email"
                         label="E-mail: "
                         validations={[
@@ -89,12 +89,12 @@ export const MyForm = () => {
                             },
                         ]}
                     />
-                    <MyField
+                    <Form_field
                         name="password"
                         label="Password: "
                         type="password"
                     />
-                    <MyField
+                    <Form_field
                         name="passwordConfirm"
                         label="Confirm password: "
                         type="password"
@@ -126,7 +126,7 @@ export const MyForm = () => {
                     onSubmit={myForm.submit}
                 >
                     E-mail already exists
-                    <MyField
+                    <Form_field
                         name="email"
                         label="E-mail: "
                         validations={[
@@ -136,12 +136,12 @@ export const MyForm = () => {
                             },
                         ]}
                     />
-                    <MyField
+                    <Form_field
                         name="password"
                         label="Password: "
                         type="password"
                     />
-                    <MyField
+                    <Form_field
                         name="passwordConfirm"
                         label="Confirm password: "
                         type="password"

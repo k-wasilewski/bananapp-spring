@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {Redirect} from 'react-router-dom';
-import {MyForm} from "./myForm";
-import {MyForm2} from "./myForm2";
+import {Form_register} from "./Form_register";
+import {Form_login} from "./Form_login";
 
 class Home extends Component {
 
@@ -12,18 +12,18 @@ class Home extends Component {
         imagePreviewUrl: null,
         prediction: null,
         redirect: false,
-        login2: false,
-        login3: false
+        register: false,
+        login: false
     };
 
-    login2 = () => {
-        if (!this.state.login2) this.setState({login2: true})
-        else this.setState({login2: false})
+    do_register = () => {
+        if (!this.state.register) this.setState({register: true})
+        else this.setState({register: false})
     }
 
-    login3 = () => {
-        if (!this.state.login3) this.setState({login3: true})
-        else this.setState({login3: false})
+    do_login = () => {
+        if (!this.state.login) this.setState({login: true})
+        else this.setState({login: false})
     }
 
     fileChangedHandler = event => {
@@ -76,32 +76,33 @@ class Home extends Component {
         if (this.state.imagePreviewUrl) {
             $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
         }
-        let $form2;
-        if ( this.state.login2 ) {
-            $form2 = (
+
+        let form_register;
+        if ( this.state.register ) {
+            form_register = (
                 <div>
-                    <MyForm />
+                    <Form_register />
                 </div>
             )
-        } else $form2 = (<div />)
-        let $form3;
+        } else form_register = (<div />)
 
-        if ( this.state.login3 ) {
-            $form3 = (<MyForm2/>)
-        } else $form3 = (<div />)
+        let form_login;
+        if ( this.state.login ) {
+            form_login = (<Form_login/>)
+        } else form_login = (<div />)
         if (!this.state.redirect) return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">{this.state.message}</h1>
-                        <button variant="outlined" onClick={this.login2}>
+                        <button variant="outlined" onClick={this.do_register}>
                             Register
                         </button>
-                    { $form2 }
-                    <button variant="outlined" onClick={this.login3}>
+                    { form_register }
+                    <button variant="outlined" onClick={this.do_login}>
                         Log-in
                     </button>
-                    { $form3 }
+                    { form_login }
                     <input type="file" name="avatar" onChange={this.fileChangedHandler} />
                     <button type="button" onClick={this.submit} > Upload </button>
                     { $imagePreview }

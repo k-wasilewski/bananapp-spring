@@ -3,7 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import './App.css';
 import axios from "axios";
 
-class AuthResults extends React.Component {
+class Auth_results extends React.Component {
 
     saveimg = (score, acc, filename) => {
         axios.post('http://localhost:8081/auth/saveimg',
@@ -67,4 +67,4 @@ class AuthResults extends React.Component {
         }
     }
 }
-export default AuthResults;
+export default Auth_results;

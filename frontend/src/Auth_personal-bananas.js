@@ -3,7 +3,7 @@ import axios from "axios";
 import Gallery from 'react-grid-gallery';
 import {Link} from "react-router-dom";
 
-class PersonalBananas extends React.Component {
+class Auth_personalBananas extends React.Component {
 
     constructor(){
         super();
@@ -120,4 +120,4 @@ class PersonalBananas extends React.Component {
     }
 }
 
-export default PersonalBananas;
+export default Auth_personalBananas;
