@@ -16,8 +16,7 @@ public class FilesController {
     @RequestMapping(value = "/auth/files", method = RequestMethod.GET)
     @ResponseBody
     public List<String> files(Principal principal) {
-        File folder = new File("/home/kuba/Desktop/CodersLab/spring-and-react/target/classes/public/auth/"
-                +principal.getName());
+        File folder = new File("/home/kuba/Desktop/CodersLab/spring-and-react/target/classes/public/auth/"+principal.getName());
         File[] listOfFiles = folder.listFiles();
 
         List<String> list = new ArrayList<>();

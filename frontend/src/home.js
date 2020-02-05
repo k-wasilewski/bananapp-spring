@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import logo from './logo0.jpg';
 import logo_title from './logotitle.jpg';
 import './App.css';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Form_register} from "./Form_register";
 import {Form_login} from "./Form_login";
+import Loading from "./Loading-component";
 
 class Home extends Component {
 
@@ -14,7 +15,8 @@ class Home extends Component {
         prediction: null,
         redirect: false,
         register: false,
-        login: false
+        login: false,
+        loading: false
     };
 
     do_register = () => {
@@ -44,6 +46,13 @@ class Home extends Component {
 
     }
 
+    submit_loading = () => {
+        this.loading();
+        setTimeout( () => {
+            this.submit();
+        }, 500);
+    }
+
     submit = () => {
 
         var fd = new FormData();
@@ -64,8 +73,12 @@ class Home extends Component {
         request.send(fd);
     }
 
+    loading = () => {
+        this.setState({loading: true});
+    }
+
     render() {
-        let $imagePreview = (<div className="previewText image-container">Please select an image</div>);
+        let $imagePreview = (<div className="previewText image-container">Select a jpg image to check your banana</div>);
         if (this.state.imagePreviewUrl) {
             $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
         }
@@ -91,6 +104,16 @@ class Home extends Component {
             }
         }
 
+        let loading_component;
+        if (this.state.loading) {
+            loading_component = (
+                <div>
+                    <Loading/>
+                </div>
+            )
+        } else loading_component = (<div />);
+
+
         if (!this.state.redirect) return (
             <div className="App">
                 <header className="App-header">
@@ -108,8 +131,15 @@ class Home extends Component {
                     </button>
                     { form_login }
                     <input type="file" name="avatar" onChange={this.fileChangedHandler} />
-                    <button type="button" onClick={this.submit} > Upload </button>
+                    <button type="button" onClick={this.submit_loading} > Upload </button>
+                    { loading_component }
                     { $imagePreview }
+                    <div className="App-break"/>
+                    <Link to="/about">
+                        <button variant="outlined">
+                            About
+                        </button>
+                    </Link>
                 </header>
             </div>
         );

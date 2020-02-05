@@ -11,9 +11,12 @@ class Auth_personalBananas extends React.Component {
             username: 0,
             images: 0,
             pred: 0,
-            IMAGES: []
+            IMAGES: [],
+            currentImage: 0
         }
-        this.imgList = this.imgList.bind(this)
+        this.imgList = this.imgList.bind(this);
+        this.deleteImage = this.deleteImage.bind(this);
+        this.onCurrentImageChange = this.onCurrentImageChange.bind(this);
     }
 
     componentDidMount() {
@@ -97,6 +100,28 @@ class Auth_personalBananas extends React.Component {
         }
     };
 
+    deleteImage() {
+        var $this = this;
+        if (window.confirm(`Are you sure you want to delete banana number ${this.state.currentImage}?`)) {
+            const filenameRegex = /\/(.*?).jpg/;
+            const filename = filenameRegex.exec(this.state.images[this.state.currentImage]);
+
+            axios.post('http://localhost:8081/auth/del',
+                "filename=" + filename
+            );
+
+            var images = this.state.IMAGES.slice();
+            images.splice(this.state.currentImage, 1)
+            this.setState({
+                IMAGES: images
+            });
+        }
+    }
+
+    onCurrentImageChange(index) {
+        this.setState({ currentImage: index });
+    }
+
     render() {
 
         return (
@@ -106,7 +131,10 @@ class Auth_personalBananas extends React.Component {
                     minHeight: "1px",
                     width: "100%",
                     overflow: "auto"}}>
-                    <Gallery images={this.state.IMAGES} />
+                    <Gallery images={this.state.IMAGES}
+                             customControls={[<button key="deleteImage" onClick={this.deleteImage}>Delete banana</button>]}
+                                 currentImageWillChange={this.onCurrentImageChange}
+                    />
                 </div>
                     <div className="App-header">
                         <Link to="/success">

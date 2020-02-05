@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from "react-router-dom";
+import Loading from "./Loading-component";
 
 class Auth_home extends React.Component {
     constructor(props) {
@@ -10,8 +11,20 @@ class Auth_home extends React.Component {
         selectedFile: null,
         imagePreviewUrl: null,
         prediction: null,
-        redirect: false
+        redirect: false,
+        loading: false
     };
+
+    submit_loading = () => {
+        this.loading();
+        setTimeout( () => {
+            this.submit();
+        }, 500);
+    }
+
+    loading = () => {
+        this.setState({loading: true});
+    }
 
     submit = () => {
 
@@ -51,16 +64,26 @@ class Auth_home extends React.Component {
     }
 
     render() {
-        let $imagePreview = (<div className="previewText image-container">Please select an Image for Preview</div>);
+        let $imagePreview = (<div className="previewText image-container">Select a jpg image to add a banana</div>);
         if (this.state.imagePreviewUrl) {
             $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
         }
+
+        let loading_component;
+        if (this.state.loading) {
+            loading_component = (
+                <div>
+                    <Loading/>
+                </div>
+            )
+        } else loading_component = (<div />);
 
         if (!this.state.redirect) return (
             <div>
                 <header>
                     <input type="file" name="avatar" onChange={this.fileChangedHandler} />
-                    <button type="button" onClick={this.submit} > Upload </button>
+                    <button type="button" onClick={this.submit_loading} > Upload </button>
+                    { loading_component }
                     { $imagePreview }
                 </header>
             </div>

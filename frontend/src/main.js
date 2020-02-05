@@ -6,6 +6,7 @@ import Success from "./Success";
 import Results from "./Results";
 import Auth_results from "./Auth_results";
 import Auth_personalBananas from "./Auth_personal-bananas";
+import About from "./About";
 
 const Main = () => {
     return (
@@ -15,6 +16,7 @@ const Main = () => {
             <Route exact path='/success' component={Success}></Route>
             <Route exact path='/auth/results' component={Auth_results}></Route>
             <Route exact path='/auth/personalBananas' component={Auth_personalBananas}></Route>
+            <Route exact path='/about' component={About}></Route>
         </Switch>
     );
 }
