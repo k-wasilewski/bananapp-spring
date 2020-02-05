@@ -84,6 +84,12 @@ class Home extends Component {
             form_login = (<Form_login/>)
         } else form_login = (<div />)
 
+        let logout_message;
+        console.log(this.state.logout);
+        if ( this.props.location.state.logout ) {
+            logout_message = (<div>Successfully logged out</div>)
+        } else logout_message = (<div />)
+
         if (!this.state.redirect) return (
             <div className="App">
                 <header className="App-header">
@@ -91,6 +97,7 @@ class Home extends Component {
                     <img src={logo} className="App-logo" alt="logo"/>
                     <div className="App-break"/>
                     <img src={logo_title} />
+                    { logout_message }
                         <button variant="outlined" onClick={this.do_register}>
                             Register
                         </button>

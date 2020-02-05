@@ -32,6 +32,9 @@ public class SecSecurityConfig
                 .usernameParameter("username").passwordParameter("password")
                 .defaultSuccessUrl("/success", true)
                 .and()
+                .logout()
+                .logoutSuccessUrl("/afterlogout")
+                .and()
                 .httpBasic()
                 .and()
                 .csrf().disable();
