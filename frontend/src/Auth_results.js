@@ -31,7 +31,7 @@ class Auth_results extends React.Component {
                 <div className="App">
                     <header className="App-header">
                         <h3>File already exists or file type not supported, try again</h3>
-                        <Link to="/">
+                        <Link to="/success">
                             <button variant="outlined">
                                 Back
                             </button>

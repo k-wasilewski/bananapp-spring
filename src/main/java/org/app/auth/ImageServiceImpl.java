@@ -24,4 +24,9 @@ public class ImageServiceImpl implements ImageService {
         Image image = imageRepository.findFirstByFilename(filename);
         return "score:"+image.getScore()+",acc:"+image.getAcc();
     }
+    @Override
+    public void delImage(String filename) {
+        Image image = imageRepository.findFirstByFilename(filename);
+        imageRepository.delete(image);
+    }
 }
