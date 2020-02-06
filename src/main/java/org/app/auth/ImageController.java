@@ -2,9 +2,11 @@ package org.app.auth;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class ImageController {
@@ -39,6 +41,26 @@ public class ImageController {
             return imageService.getPrediction(filename, username);
         } catch (Exception e) {
             return "failed";
+        }
+    }
+
+    @RequestMapping(value = "/auth/del", method = RequestMethod.POST)
+    @ResponseBody
+    public void delImage(@RequestParam("filename") String filenamePaths,
+                         @RequestParam("username") String username) {
+        Pattern p = Pattern.compile("\\/([^\\/]*?),");
+        Matcher matcher = p.matcher(filenamePaths);
+
+        String APP_PATH = "/home/kuba/Desktop/CodersLab/spring-and-react/target/classes/public/auth";
+
+        if (matcher.find()){
+            String filename = matcher.group(1);
+            imageService.delImage(filename, username);
+
+            String filepath = APP_PATH + File.separator + username +
+                    File.separator + filename;
+            File file = new File(filepath);
+            file.delete();
         }
     }
 }

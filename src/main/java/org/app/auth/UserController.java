@@ -3,6 +3,7 @@ package org.app.auth;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -28,10 +29,9 @@ public class UserController {
         return "success";
     }
 
-    @GetMapping("/admin")
+    @RequestMapping(value = "/auth/username", method = RequestMethod.GET)
     @ResponseBody
-    public String admin() {
-        return "admin";
+    public String currentUserName(Principal principal) {
+        return principal.getName();
     }
-
 }
