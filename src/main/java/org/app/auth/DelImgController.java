@@ -1,4 +1,4 @@
-package org.app;
+package org.app.auth;
 
 import org.app.auth.ImageService;
 import org.springframework.context.annotation.Lazy;
@@ -24,7 +24,6 @@ public class DelImgController {
         Pattern p = Pattern.compile("\\/([^\\/]*?),");
         Matcher matcher = p.matcher(filename);
         if (matcher.find()){
-            System.out.println("del: "+matcher.group(1));
             imageService.delImage(matcher.group(1), username);
         }
     }

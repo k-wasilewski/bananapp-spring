@@ -1,4 +1,4 @@
-package org.app;
+package org.app.auth;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.security.Principal;
 
 @Controller
-public class SecurityController {
+public class AuthController {
 
-    @RequestMapping(value = "/auth/username", method = RequestMethod.GET)
+    @RequestMapping(value = "/auth/ok", method = RequestMethod.GET)
     @ResponseBody
     public String currentUserName(Principal principal) {
-        return principal.getName();
+        return "ok";
     }
 }

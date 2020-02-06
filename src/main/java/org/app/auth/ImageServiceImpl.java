@@ -3,10 +3,6 @@ package org.app.auth;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-
 @Service
 public class ImageServiceImpl implements ImageService {
     private ImageRepository imageRepository;

@@ -12,15 +12,15 @@ public class Image {
     private String acc;
     private String username;
 
+    public Image() {
+    }
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Image() {
     }
 
     public Integer getId() {
