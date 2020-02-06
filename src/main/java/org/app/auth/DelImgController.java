@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,12 +20,21 @@ public class DelImgController {
 
     @RequestMapping(value = "/auth/del", method = RequestMethod.POST)
     @ResponseBody
-    public void files(@RequestParam("filename") String filename,
+    public void files(@RequestParam("filename") String filenamePaths,
                       @RequestParam("username") String username) {
         Pattern p = Pattern.compile("\\/([^\\/]*?),");
-        Matcher matcher = p.matcher(filename);
+        Matcher matcher = p.matcher(filenamePaths);
+
+        String APP_PATH = "/home/kuba/Desktop/CodersLab/spring-and-react/target/classes/public/auth";
+
         if (matcher.find()){
-            imageService.delImage(matcher.group(1), username);
+            String filename = matcher.group(1);
+            imageService.delImage(filename, username);
+
+            String filepath = APP_PATH + File.separator + username +
+                    File.separator + filename;
+            File file = new File(filepath);
+            file.delete();
         }
     }
 }
