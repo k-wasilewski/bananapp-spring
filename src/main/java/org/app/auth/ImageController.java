@@ -16,12 +16,14 @@ public class ImageController {
     @ResponseBody
     public String createImage(@RequestParam("filename") String filename,
                             @RequestParam("score") String score,
-                            @RequestParam("acc") String acc) {
+                            @RequestParam("acc") String acc,
+                            @RequestParam("uname") String username) {
         try {
             Image img = new Image();
             img.setFilename(filename);
             img.setScore(score);
             img.setAcc(acc);
+            img.setUsername(username);
             imageService.saveImage(img);
             return "saved at backend";
         } catch (Exception e) {
@@ -31,9 +33,10 @@ public class ImageController {
 
     @PostMapping("/auth/imgpred")
     @ResponseBody
-    public String getImgPrediction(@RequestParam("filename") String filename) {
+    public String getImgPrediction(@RequestParam("filename") String filename,
+                                   @RequestParam("username") String username) {
         try {
-            return imageService.getPrediction(filename);
+            return imageService.getPrediction(filename, username);
         } catch (Exception e) {
             return "failed";
         }

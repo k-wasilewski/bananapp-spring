@@ -92,7 +92,8 @@ class Auth_home extends React.Component {
             <Redirect to={{
                 pathname: '/auth/results',
                 state: { prediction: this.state.prediction,
-                    img: this.state.imagePreviewUrl}
+                        img: this.state.imagePreviewUrl,
+                        username: this.props.username}
             }}/>
         )
     }

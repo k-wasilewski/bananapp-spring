@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ImageRepository extends JpaRepository<Image, Integer> {
-    Image findFirstByFilename(String filename);
+    Image findFirstByFilenameAndUsername(String filename, String username);
 }

@@ -5,16 +5,18 @@ import axios from "axios";
 
 class Auth_results extends React.Component {
 
-    saveimg = (score, acc, filename) => {
+    saveimg = (score, acc, filename, username) => {
         axios.post('http://localhost:8081/auth/saveimg',
             "filename=" + filename[1] + "&"
-            + "score=" + score[1] + "&" + "acc=" +acc[1]
+            + "score=" + score[1] + "&" + "acc=" +acc[1] +
+            "&" + "uname=" + username
         )};
 
 
     render() {
         const img = this.props.location.state.img;
         const prediction = this.props.location.state.prediction;
+        const username = this.props.location.state.username;
 
         const scoreRegex = /score:(.*?),/;
         const accRegex = /accuracy:(0\.\d\d)/;
@@ -40,7 +42,7 @@ class Auth_results extends React.Component {
                 </div>
             )
         } else {
-            this.saveimg(score, accuracy, filename);
+            this.saveimg(score, accuracy, filename, username);
 
             if (score[1]==1.0) days="1 day";
             else if (score[1]==2.0) days="2 days";

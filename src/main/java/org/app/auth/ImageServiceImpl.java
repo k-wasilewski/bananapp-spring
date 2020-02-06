@@ -20,13 +20,13 @@ public class ImageServiceImpl implements ImageService {
         imageRepository.save(image);
     }
     @Override
-    public String getPrediction(String filename) {
-        Image image = imageRepository.findFirstByFilename(filename);
+    public String getPrediction(String filename, String username) {
+        Image image = imageRepository.findFirstByFilenameAndUsername(filename, username);
         return "score:"+image.getScore()+",acc:"+image.getAcc();
     }
     @Override
-    public void delImage(String filename) {
-        Image image = imageRepository.findFirstByFilename(filename);
+    public void delImage(String filename, String username) {
+        Image image = imageRepository.findFirstByFilenameAndUsername(filename, username);
         imageRepository.delete(image);
     }
 }

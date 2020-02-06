@@ -10,6 +10,15 @@ public class Image {
     private String filename;
     private String score;
     private String acc;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Image() {
     }

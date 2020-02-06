@@ -51,7 +51,8 @@ class Auth_personalBananas extends React.Component {
         let filename = regex.exec(path);
 
         axios.post('http://localhost:8081/auth/imgpred',
-            "filename=" + filename[1]
+            "filename=" + filename[1] + "&" +
+                "username=" + username
         ).then(function (response) {
             if (response.status === 200) {
                 const prediction = response.data;
@@ -102,12 +103,15 @@ class Auth_personalBananas extends React.Component {
 
     deleteImage() {
         var $this = this;
+        var username = this.state.username;
+
         if (window.confirm(`Are you sure you want to delete banana number ${this.state.currentImage}?`)) {
             const filenameRegex = /\/(.*?).jpg/;
             const filename = filenameRegex.exec(this.state.images[this.state.currentImage]);
 
             axios.post('http://localhost:8081/auth/del',
-                "filename=" + filename
+                "filename=" + filename + "&" +
+                "username=" + username
             );
 
             var images = this.state.IMAGES.slice();

@@ -19,12 +19,13 @@ public class DelImgController {
 
     @RequestMapping(value = "/auth/del", method = RequestMethod.POST)
     @ResponseBody
-    public void files(@RequestParam("filename") String filename) {
+    public void files(@RequestParam("filename") String filename,
+                      @RequestParam("username") String username) {
         Pattern p = Pattern.compile("\\/([^\\/]*?),");
         Matcher matcher = p.matcher(filename);
         if (matcher.find()){
             System.out.println("del: "+matcher.group(1));
-            imageService.delImage(matcher.group(1));
+            imageService.delImage(matcher.group(1), username);
         }
     }
 }
