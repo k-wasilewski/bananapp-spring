@@ -17,11 +17,11 @@ class Results extends React.Component {
 
         var days = '[error]';
 
-        if (!score) {
+        if (!score || score==null || accuracy==null) {
             return (
                 <div className="App">
                     <header className="App-header">
-                        <h3>File already exists or file type not supported, try again</h3>
+                        <h3>File already exists or file type not supported or it's not a banana, try again</h3>
                         <Link to="/">
                             <button variant="outlined">
                                 Back

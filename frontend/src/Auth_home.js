@@ -12,7 +12,8 @@ class Auth_home extends React.Component {
         imagePreviewUrl: null,
         prediction: null,
         redirect: false,
-        loading: false
+        loading: false,
+        error: false
     };
 
     submit_loading = () => {
@@ -27,29 +28,40 @@ class Auth_home extends React.Component {
     }
 
     submit = () => {
+        if (this.state.selectedFile!=null) {
+            var fd = new FormData();
 
-        var fd = new FormData();
+            fd.append('file', this.state.selectedFile);
 
-        fd.append('file', this.state.selectedFile);
+            var request = new XMLHttpRequest();
 
-        var request = new XMLHttpRequest();
-
-        var $this = this;
-        request.onload = function() {
-            $this.setState({
-                prediction: request.response,
-                redirect: true
-            });
-        };
-
-        request.open("POST", "http://localhost:8082/auth/image?uname="+this.props.username, true);
-        request.send(fd);
+            var $this = this;
+            request.onload = function() {
+                $this.setState({
+                    prediction: request.response,
+                    redirect: true
+                });
+            }
+            request.open("POST", "http://localhost:8082/auth/image?uname="+this.props.username, true);
+            request.send(fd);
+        } else {
+            this.setState({
+                error: true,
+                loading: false
+            })
+        }
     }
 
     fileChangedHandler = event => {
-        this.setState({
-            selectedFile: event.target.files[0]
-        })
+        if (event.target.files[0].size>1024*1024) {
+            this.setState({
+                selectedFile: null
+            })
+        } else {
+            this.setState({
+                selectedFile: event.target.files[0]
+            })
+        }
 
         let reader = new FileReader();
 
@@ -64,6 +76,11 @@ class Auth_home extends React.Component {
     }
 
     render() {
+        let error_msg;
+        if (this.state.error) {
+            error_msg = (<div>File is too big</div>)
+        } else error_msg = (<div/>);
+
         let $imagePreview = (<div className="previewText image-container">Select a jpg image to add a banana</div>);
         if (this.state.imagePreviewUrl) {
             $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
@@ -84,6 +101,7 @@ class Auth_home extends React.Component {
                     <input type="file" name="avatar" onChange={this.fileChangedHandler} />
                     <button type="button" onClick={this.submit_loading} > Upload </button>
                     { loading_component }
+                    { error_msg }
                     { $imagePreview }
                 </header>
             </div>

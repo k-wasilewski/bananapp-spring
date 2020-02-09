@@ -16,7 +16,8 @@ class Home extends Component {
         redirect: false,
         register: false,
         login: false,
-        loading: false
+        loading: false,
+        error: false
     };
 
     do_register = () => {
@@ -30,9 +31,15 @@ class Home extends Component {
     }
 
     fileChangedHandler = event => {
-        this.setState({
-            selectedFile: event.target.files[0]
-        })
+        if (event.target.files[0].size>1024*1024) {
+            this.setState({
+                selectedFile: null
+            })
+        } else {
+            this.setState({
+                selectedFile: event.target.files[0]
+            })
+        }
 
         let reader = new FileReader();
 
@@ -54,23 +61,28 @@ class Home extends Component {
     }
 
     submit = () => {
+        if (this.state.selectedFile!=null) {
+            var fd = new FormData();
 
-        var fd = new FormData();
+            fd.append('file', this.state.selectedFile);
 
-        fd.append('file', this.state.selectedFile);
+            var request = new XMLHttpRequest();
 
-        var request = new XMLHttpRequest();
-
-        var $this = this;
-        request.onload = function() {
-            $this.setState({
-                prediction: request.response,
-                redirect: true
-            });
-        };
-
-        request.open("POST", "http://localhost:8082/image", true);
-        request.send(fd);
+            var $this = this;
+            request.onload = function() {
+                $this.setState({
+                    prediction: request.response,
+                    redirect: true
+                });
+            }
+            request.open("POST", "http://localhost:8082/image", true);
+            request.send(fd);
+        } else {
+            this.setState({
+                error: true,
+                loading: false
+            })
+        }
     }
 
     loading = () => {
@@ -78,7 +90,7 @@ class Home extends Component {
     }
 
     render() {
-        let $imagePreview = (<div className="previewText image-container">Select a jpg image to check your banana</div>);
+        let $imagePreview = (<div className="previewText image-container">Select a jpg image (max filesize 1 MB) to check your banana</div>);
         if (this.state.imagePreviewUrl) {
             $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
         }
@@ -113,6 +125,11 @@ class Home extends Component {
             )
         } else loading_component = (<div />);
 
+        let error_msg;
+        if (this.state.error) {
+            error_msg = (<div>File is too big</div>)
+        } else error_msg = (<div/>);
+
 
         if (!this.state.redirect) return (
             <div className="App">
@@ -133,6 +150,7 @@ class Home extends Component {
                     <input type="file" name="avatar" onChange={this.fileChangedHandler} />
                     <button type="button" onClick={this.submit_loading} > Upload </button>
                     { loading_component }
+                    { error_msg }
                     { $imagePreview }
                     <div className="App-break"/>
                     <Link to="/about">
@@ -143,7 +161,7 @@ class Home extends Component {
                 </header>
             </div>
         );
-        else if (this.state.redirect) {
+        else if (this.state.redirect || !this.state.error) {
             return (
                 <Redirect to={{
                     pathname: '/results',
