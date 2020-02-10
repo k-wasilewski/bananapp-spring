@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, Redirect} from "react-router-dom";
-import './App.css';
+import '../../css/App.css';
 import axios from "axios";
 
 class Auth_results extends React.Component {

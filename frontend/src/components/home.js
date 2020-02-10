@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import logo from './logo0.jpg';
-import logo_title from './logotitle.jpg';
-import './App.css';
+import logo from '../jpg/logo0.jpg';
+import logo_title from '../jpg/logotitle.jpg';
+import '../css/App.css';
 import {Link, Redirect} from 'react-router-dom';
-import {Form_register} from "./Form_register";
-import {Form_login} from "./Form_login";
+import {Form_register} from "./form/Form_register";
+import {Form_login} from "./form/Form_login";
 import Loading from "./Loading-component";
 
 class Home extends Component {

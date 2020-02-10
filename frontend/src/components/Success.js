@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from "react-router-dom";
-import './App.css';
+import '../css/App.css';
 import axios from "axios";
-import Auth_home from './Auth_home';
+import Auth_home from './auth/Auth_home';
 
 class Success extends Component {
 

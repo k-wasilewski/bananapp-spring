@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from "./home";
-import Success from "./Success";
-import Results from "./Results";
-import Auth_results from "./Auth_results";
-import Auth_personalBananas from "./Auth_personal-bananas";
-import About from "./About";
+import Home from "../components/home";
+import Success from "../components/Success";
+import Results from "../components/Results";
+import Auth_results from "../components/auth/Auth_results";
+import Auth_personalBananas from "../components/auth/Auth_personal-bananas";
+import About from "../components/About";
 
 const Main = () => {
     return (
