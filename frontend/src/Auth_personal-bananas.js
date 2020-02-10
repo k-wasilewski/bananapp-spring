@@ -64,13 +64,30 @@ class Auth_personalBananas extends React.Component {
                 const accuracy = accRegex.exec(prediction);
 
                 var days = '[error]';
-                if (score[1]==1.0) days="1 day";
-                else if (score[1]==2.0) days="2 days";
-                else if (score[1]==3.0) days="3 days";
-                else if (score[1]==4.0) days="4 days";
-                else if (score[1]==5.0) days="5 days";
-                else if (score[1]==6.0) days="6 days";
-                else if (score[1]==7.0) days="7 days";
+
+                switch(true) {
+                    case score[1]==1.0:
+                        days="1 day";
+                        break;
+                    case score[1]==2.0:
+                        days="2 days";
+                        break;
+                    case score[1]==3.0:
+                        days="3 days";
+                        break;
+                    case score[1]==4.0:
+                        days="4 days";
+                        break;
+                    case score[1]==5.0:
+                        days="5 days";
+                        break;
+                    case score[1]==6.0:
+                        days="6 days";
+                        break;
+                    case score[1]==7.0:
+                        days="7 days";
+                        break;
+                }
 
                 $this.setState({
                     pred: days+" for "+Number((accuracy[1]*100).toFixed(2)) +"%"
