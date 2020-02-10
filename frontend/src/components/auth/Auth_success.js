@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from "react-router-dom";
-import '../css/App.css';
+import '../../css/App.css';
 import axios from "axios";
-import Auth_home from './auth/Auth_home';
+import Auth_home from './Auth_home';
 
-class Success extends Component {
+class Auth_success extends Component {
 
     constructor(){
         super();
@@ -27,7 +27,6 @@ class Success extends Component {
     logout = () => {
         axios.get('http://localhost:8081/logout')
             .then((response) => {
-                console.log(response.data);
                 this.setState({
                     redir: 'logout'
                 });
@@ -87,4 +86,4 @@ class Success extends Component {
         }
     }
 }
-export default Success;
+export default Auth_success;

@@ -46,7 +46,6 @@ class Auth_personalBananas extends React.Component {
         var $this = this;
 
         let regex = new RegExp(username+'\/(.*?)$');
-        let imgRegex= /{username}\/(.*?)$/;
 
         let filename = regex.exec(path);
 
