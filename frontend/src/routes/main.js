@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from "../components/instant/home";
+import Home from "../components/instant/Home/Home";
 import Auth_success from "../components/auth/Auth_success";
 import Results from "../components/instant/Results";
 import Auth_results from "../components/auth/Auth_results";

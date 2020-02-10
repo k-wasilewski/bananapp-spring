@@ -1,13 +1,20 @@
 import React, {Component} from 'react';
-import logo from '../../jpg/logo0.jpg';
-import logo_title from '../../jpg/logotitle.jpg';
-import '../../css/App.css';
-import {Link, Redirect} from 'react-router-dom';
-import {Form_register} from "./form/Form_register";
-import {Form_login} from "./form/Form_login";
-import Loading from "../Loading-component";
+import '../../../css/App.css';
+import {Form_register} from "../../form/Form_register";
+import {Form_login} from "../../form/Form_login";
+import Loading from "../../Loading-component";
+import Landing_page from "./views/Landing-page";
+import Home_redirect from "./views/Home_redirect";
 
 class Home extends Component {
+    constructor(props) {
+        super(props)
+
+        this.do_register = this.do_register.bind(this)
+        this.do_login = this.do_login.bind(this)
+        this.fileChangedHandler = this.fileChangedHandler.bind(this)
+        this.submit_loading = this.submit_loading.bind(this)
+    }
 
     state =  {
         selectedFile: null,
@@ -90,9 +97,9 @@ class Home extends Component {
     }
 
     render() {
-        let $imagePreview = (<div className="previewText image-container">Select a jpg image (max filesize 1 MB) to check your banana</div>);
+        let imagePreview = (<div className="previewText image-container">Select a jpg image (max filesize 1 MB) to check your banana</div>);
         if (this.state.imagePreviewUrl) {
-            $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
+            imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
         }
 
         let form_register;
@@ -132,42 +139,21 @@ class Home extends Component {
 
 
         if (!this.state.redirect) return (
-            <div className="App">
-                <header className="App-header">
-                    <div className="App-break"/>
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <div className="App-break"/>
-                    <img src={logo_title} />
-                    { logout_message }
-                        <button variant="outlined" onClick={this.do_register}>
-                            Register
-                        </button>
-                    { form_register }
-                    <button variant="outlined" onClick={this.do_login}>
-                        Log-in
-                    </button>
-                    { form_login }
-                    <input type="file" name="avatar" onChange={this.fileChangedHandler} />
-                    <button type="button" onClick={this.submit_loading} > Upload </button>
-                    { loading_component }
-                    { error_msg }
-                    { $imagePreview }
-                    <div className="App-break"/>
-                    <Link to="/about">
-                        <button variant="outlined">
-                            About
-                        </button>
-                    </Link>
-                </header>
-            </div>
+            <Landing_page do_register={this.do_register}
+                            do_login={this.do_login}
+                            fileChangedHandler={this.fileChangedHandler}
+                            submit_loading={this.submit_loading}
+                            logout_message={logout_message}
+                            form_register={form_register}
+                            form_login={form_login}
+                            loading_component={loading_component}
+                            error_msg={error_msg}
+                            image_preview={imagePreview}/>
         );
         else if (this.state.redirect || !this.state.error) {
             return (
-                <Redirect to={{
-                    pathname: '/results',
-                    state: { prediction: this.state.prediction,
-                            img: this.state.imagePreviewUrl}
-                }}/>
+                <Home_redirect prediction={this.state.prediction}
+                              img={this.state.imagePreviewUrl}/>
             )
         }
     }
