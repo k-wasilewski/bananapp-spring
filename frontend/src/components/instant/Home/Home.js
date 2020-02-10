@@ -140,20 +140,20 @@ class Home extends Component {
 
         if (!this.state.redirect) return (
             <Landing_page do_register={this.do_register}
-                            do_login={this.do_login}
-                            fileChangedHandler={this.fileChangedHandler}
-                            submit_loading={this.submit_loading}
-                            logout_message={logout_message}
-                            form_register={form_register}
-                            form_login={form_login}
-                            loading_component={loading_component}
-                            error_msg={error_msg}
-                            image_preview={imagePreview}/>
+                          do_login={this.do_login}
+                          fileChangedHandler={this.fileChangedHandler}
+                          submit_loading={this.submit_loading}
+                          logout_message={logout_message}
+                          form_register={form_register}
+                          form_login={form_login}
+                          loading_component={loading_component}
+                          error_msg={error_msg}
+                          image_preview={imagePreview}/>
         );
         else if (this.state.redirect || !this.state.error) {
             return (
                 <Home_redirect prediction={this.state.prediction}
-                              img={this.state.imagePreviewUrl}/>
+                               img={this.state.imagePreviewUrl}/>
             )
         }
     }
