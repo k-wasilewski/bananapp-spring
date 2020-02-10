@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import Gallery from 'react-grid-gallery';
-import {Link} from "react-router-dom";
+import Personal_bananas from "./views/Personal_bananas";
 
 class Auth_personalBananas extends React.Component {
 
@@ -145,25 +144,9 @@ class Auth_personalBananas extends React.Component {
     render() {
 
         return (
-            <div className="App">
-                <div style={{
-                    display: "block",
-                    minHeight: "1px",
-                    width: "100%",
-                    overflow: "auto"}}>
-                    <Gallery images={this.state.IMAGES}
-                             customControls={[<button key="deleteImage" onClick={this.deleteImage}>Delete banana</button>]}
-                                 currentImageWillChange={this.onCurrentImageChange}
-                    />
-                </div>
-                    <div className="App-header">
-                        <Link to="/success">
-                            <button variant="outlined">
-                                Back
-                            </button>
-                        </Link>
-                    </div>
-                </div>
+            <Personal_bananas deleteImage={this.deleteImage}
+                            onCurrentImageChange={this.onCurrentImageChange}
+                            IMAGES={this.state.IMAGES}/>
         )
     }
 }

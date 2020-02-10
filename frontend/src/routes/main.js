@@ -5,7 +5,7 @@ import Home from "../components/instant/Home/Home";
 import Auth_success from "../components/auth/Success/Auth_success";
 import Results from "../components/instant/Results/Results";
 import Auth_results from "../components/auth/Auth_results";
-import Auth_personalBananas from "../components/auth/Auth_personal-bananas";
+import Auth_personalBananas from "../components/auth/Personal-bananas/Auth_personal-bananas";
 import About from "../components/instant/About";
 
 const Main = () => {
