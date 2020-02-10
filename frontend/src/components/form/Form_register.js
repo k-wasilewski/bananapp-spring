@@ -21,145 +21,58 @@ export const Form_register = () => {
         });
     };
 
-    if (redirect == 0) {
-        return (
-            <Formiz
-                connect={myForm}
-                onValidSubmit={handleSubmit}
-            >
-                <form
-                    noValidate
-                    onSubmit={myForm.submit}
-                >
-                    <Form_field
-                        name="email"
-                        label="E-mail: "
-                        validations={[
-                            {
-                                rule: isEmail(),
-                                message: 'This is not a valid email',
-                            },
-                        ]}
-                    />
-                    <Form_field
-                        name="password"
-                        label="Password: "
-                        type="password"
-                    />
-                    <Form_field
-                        name="passwordConfirm"
-                        label="Confirm password: "
-                        type="password"
-                        validations={[
-                            {
-                                rule: (value) => myForm.values.password === value,
-                                deps: [myForm.values.password],
-                                message: 'Passwords do not match',
-                            }
-                        ]}
-                    />
-                    <button
-                        type="submit"
-                        disabled={!myForm.isValid}
-                    >
-                        Submit
-                    </button>
-                </form>
-            </Formiz>
-        );
-    } else if (redirect=="success") {
-        return (
-            <Formiz
-                connect={myForm}
-                onValidSubmit={handleSubmit}
-            >
-                Registration success
-                <form
-                    noValidate
-                    onSubmit={myForm.submit}
-                >
-                    <Form_field
-                        name="email"
-                        label="E-mail: "
-                        validations={[
-                            {
-                                rule: isEmail(),
-                                message: 'This is not a valid email',
-                            },
-                        ]}
-                    />
-                    <Form_field
-                        name="password"
-                        label="Password: "
-                        type="password"
-                    />
-                    <Form_field
-                        name="passwordConfirm"
-                        label="Confirm password: "
-                        type="password"
-                        validations={[
-                            {
-                                rule: (value) => myForm.values.password === value,
-                                deps: [myForm.values.password],
-                                message: 'Passwords do not match',
-                            }
-                        ]}
-                    />
-                    <button
-                        type="submit"
-                        disabled={!myForm.isValid}
-                    >
-                        Submit
-                    </button>
-                </form>
-            </Formiz>
-        );
-    } else {
-        return (
-            <Formiz
-                connect={myForm}
-                onValidSubmit={handleSubmit}
-            >
-                <form
-                    noValidate
-                    onSubmit={myForm.submit}
-                >
-                    E-mail already exists
-                    <Form_field
-                        name="email"
-                        label="E-mail: "
-                        validations={[
-                            {
-                                rule: isEmail(),
-                                message: 'This is not a valid email',
-                            },
-                        ]}
-                    />
-                    <Form_field
-                        name="password"
-                        label="Password: "
-                        type="password"
-                    />
-                    <Form_field
-                        name="passwordConfirm"
-                        label="Confirm password: "
-                        type="password"
-                        validations={[
-                            {
-                                rule: (value) => myForm.values.password === value,
-                                deps: [myForm.values.password],
-                                message: 'Passwords do not match',
-                            }
-                        ]}
-                    />
-                    <button
-                        type="submit"
-                        disabled={!myForm.isValid}
-                    >
-                        Submit
-                    </button>
-                </form>
-            </Formiz>
-        );
+    let message = (<div/>);
+    if (redirect == 'success') {
+        message = (<div>Registration success</div>)
+    } else if (redirect != 0) {
+        message = (<div>E-mail already exists</div>)
     }
+
+    return (
+        <Formiz
+            connect={myForm}
+            onValidSubmit={handleSubmit}
+        >
+            {message}
+            <form
+                noValidate
+                onSubmit={myForm.submit}
+            >
+                <Form_field
+                    name="email"
+                    label="E-mail: "
+                    validations={[
+                        {
+                            rule: isEmail(),
+                            message: 'This is not a valid email',
+                        },
+                    ]}
+                />
+                <Form_field
+                    name="password"
+                    label="Password: "
+                    type="password"
+                />
+                <Form_field
+                    name="passwordConfirm"
+                    label="Confirm password: "
+                    type="password"
+                    validations={[
+                        {
+                            rule: (value) => myForm.values.password === value,
+                            deps: [myForm.values.password],
+                            message: 'Passwords do not match',
+                        }
+                    ]}
+                />
+                <button
+                    type="submit"
+                    disabled={!myForm.isValid}
+                >
+                    Submit
+                </button>
+            </form>
+        </Formiz>
+    );
 };
+
