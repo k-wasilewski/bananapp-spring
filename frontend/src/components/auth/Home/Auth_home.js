@@ -1,7 +1,7 @@
 import React from 'react';
-import {Redirect} from "react-router-dom";
 import Loading from "../../Loading-component";
 import Auth_landingPage from "./views/Auth_landing-page";
+import Auth_redirectResults from "./views/Auth_redirectResults";
 
 class Auth_home extends React.Component {
     constructor(props) {
@@ -107,12 +107,9 @@ class Auth_home extends React.Component {
                             $imagePreview={$imagePreview}/>
         );
         else return (
-            <Redirect to={{
-                pathname: '/auth/results',
-                state: { prediction: this.state.prediction,
-                        img: this.state.imagePreviewUrl,
-                        username: this.props.username}
-            }}/>
+            <Auth_redirectResults prediction={this.state.prediction}
+                                  img={this.state.imagePreviewUrl}
+                                  username={this.props.username}/>
         )
     }
 }

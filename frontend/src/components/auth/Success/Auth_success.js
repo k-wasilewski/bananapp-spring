@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Link, Redirect} from "react-router-dom";
 import '../../../css/App.css';
 import axios from "axios";
 import Fail from "./views/Fail";
 import Success from "./views/Success";
+import Logout from "./views/Logout";
 
 class Auth_success extends Component {
 
@@ -46,10 +46,7 @@ class Auth_success extends Component {
             );
         } else if (this.state.redir=='logout') {
             return (
-                <Redirect to={{
-                    pathname: '/',
-                    state: { logout: true }
-                }}/>
+                <Logout/>
             )
         }
     }
