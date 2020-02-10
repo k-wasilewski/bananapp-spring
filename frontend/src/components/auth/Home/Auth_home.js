@@ -1,10 +1,14 @@
 import React from 'react';
 import {Redirect} from "react-router-dom";
-import Loading from "../Loading-component";
+import Loading from "../../Loading-component";
+import Auth_landingPage from "./views/Auth_landing-page";
 
 class Auth_home extends React.Component {
     constructor(props) {
         super(props);
+
+        this.fileChangedHandler = this.fileChangedHandler.bind(this)
+        this.submit_loading = this.submit_loading.bind(this)
     }
 
     state =  {
@@ -96,15 +100,11 @@ class Auth_home extends React.Component {
         } else loading_component = (<div />);
 
         if (!this.state.redirect) return (
-            <div>
-                <header>
-                    <input type="file" name="avatar" onChange={this.fileChangedHandler} />
-                    <button type="button" onClick={this.submit_loading} > Upload </button>
-                    { loading_component }
-                    { error_msg }
-                    { $imagePreview }
-                </header>
-            </div>
+            <Auth_landingPage fileChangedHandler={this.fileChangedHandler}
+                            submit_loading={this.submit_loading}
+                            loading_component={loading_component}
+                            error_msg={error_msg}
+                            $imagePreview={$imagePreview}/>
         );
         else return (
             <Redirect to={{
