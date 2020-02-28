@@ -1,5 +1,6 @@
 package org.app.auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,18 +13,17 @@ import java.util.List;
 
 @Controller
 public class FilesController {
+    @Autowired
+    ImageService imageService;
 
     @RequestMapping(value = "/auth/files", method = RequestMethod.GET)
     @ResponseBody
     public List<String> files(Principal principal) {
-        File folder = new File("/home/kuba/Desktop/CodersLab/spring-and-react/target/classes/public/auth/"+principal.getName());
-        File[] listOfFiles = folder.listFiles();
+        List<Image> images = imageService.getImagesByUsername(principal.getName());
 
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-                list.add("auth/"+principal.getName()+"/"+listOfFiles[i].getName());
-            }
+        for (Image i : images) {
+            list.add(i.getFilename()+",,,"+i.getLink());
         }
         return list;
     }

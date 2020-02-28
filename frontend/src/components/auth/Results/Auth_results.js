@@ -7,11 +7,11 @@ import Auth_resultsView from "./views/Auth_resultsView";
 
 class Auth_results extends React.Component {
 
-    saveimg = (score, acc, filename, username) => {
+    saveimg = (score, acc, filename, username, pic_link) => {
         axios.post('http://localhost:8081/auth/saveimg',
             "filename=" + filename[1] + "&"
             + "score=" + score[1] + "&" + "acc=" +acc[1] +
-            "&" + "uname=" + username
+            "&" + "uname=" + username + "&" + "link=" + pic_link.split('+').join('plussign')
         )};
 
 
@@ -58,7 +58,7 @@ class Auth_results extends React.Component {
                 <Error/>
             )
         } else {
-            this.saveimg(score, accuracy, filename, username);
+            this.saveimg(score, accuracy, filename, username, img);
 
             return (
                 <Auth_resultsView img={img}

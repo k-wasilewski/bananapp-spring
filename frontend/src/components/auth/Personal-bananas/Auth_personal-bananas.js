@@ -44,9 +44,14 @@ class Auth_personalBananas extends React.Component {
         var username = this.state.username;
         var $this = this;
 
-        let regex = new RegExp(username+'\/(.*?)$');
+        let regexFilename = new RegExp('^(.*?),,,');
 
-        let filename = regex.exec(path);
+        let filename = regexFilename.exec(path);
+
+        let regexUrl = new RegExp(',,,(.*?)$');
+
+        let url = regexUrl.exec(path);
+
 
         axios.post('http://localhost:8081/auth/imgpred',
             "filename=" + filename[1] + "&" +
@@ -89,7 +94,7 @@ class Auth_personalBananas extends React.Component {
 
                 $this.setState({
                     pred: days+" for "+Number((accuracy[1]*100).toFixed(2)) +"%"
-                }, function() { $this.IMAGESpush(path) } );
+                }, function() { $this.IMAGESpush(url[1]) } );
             }
         });
     }
@@ -97,8 +102,8 @@ class Auth_personalBananas extends React.Component {
     IMAGESpush = (path) => {
         var $this = this;
         const newIMAGE = {
-            src: process.env.PUBLIC_URL +`/${path}`,
-            thumbnail: process.env.PUBLIC_URL +`/${path}`,
+            src: `${path}`,
+            thumbnail: `${path}`,
             caption: $this.state.pred,
             tags: [{value: $this.state.pred, title: $this.state.pred}]
         };

@@ -17,15 +17,17 @@ public class ImageController {
     @PostMapping("/auth/saveimg")
     @ResponseBody
     public String createImage(@RequestParam("filename") String filename,
-                            @RequestParam("score") String score,
-                            @RequestParam("acc") String acc,
-                            @RequestParam("uname") String username) {
+                              @RequestParam("score") String score,
+                              @RequestParam("acc") String acc,
+                              @RequestParam("uname") String username,
+                              @RequestParam("link") String link) {
         try {
             Image img = new Image();
             img.setFilename(filename);
             img.setScore(score);
             img.setAcc(acc);
             img.setUsername(username);
+            img.setLink(link.replace("plussign", "+"));
             imageService.saveImage(img);
             return "saved at backend";
         } catch (Exception e) {
@@ -51,7 +53,7 @@ public class ImageController {
         Pattern p = Pattern.compile("\\/([^\\/]*?),");
         Matcher matcher = p.matcher(filenamePaths);
 
-        String APP_PATH = "/home/kuba/Desktop/CodersLab/spring-and-react/target/classes/public/auth";
+        String APP_PATH = "/home/kuba/Pulpit/CodersLab/spring-and-react/target/classes/public/auth";
 
         if (matcher.find()){
             String filename = matcher.group(1);

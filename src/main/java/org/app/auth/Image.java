@@ -11,6 +11,8 @@ public class Image {
     private String score;
     private String acc;
     private String username;
+    @Column(length = 100000)
+    private String link;
 
     public Image() {
     }
@@ -53,5 +55,13 @@ public class Image {
 
     public void setAcc(String acc) {
         this.acc = acc;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }
