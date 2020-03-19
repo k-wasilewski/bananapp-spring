@@ -14,13 +14,17 @@ import static org.junit.Assert.*;
 public class UserRepositoryTest {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserService userService;
     private User user;
 
     @Before
     public void init() {
         user = new User();
         user.setUsername("user1");
-        userRepository.save(user);
+        if (userRepository.findByUsername("user1")==null) {
+            userService.saveUser(user);
+        }
     }
 
     @Test

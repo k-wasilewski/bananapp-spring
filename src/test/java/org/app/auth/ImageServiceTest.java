@@ -33,7 +33,9 @@ public class ImageServiceTest {
     public void saveImage() {
         imageService.saveImage(image);
 
-        assertEquals(image, imageRepository.findFirstByFilenameAndUsername("test.jpeg", "user1"));
+        assertEquals(image.getFilename(),
+                imageRepository.findFirstByFilenameAndUsername("test.jpeg", "user1")
+                .getFilename());
     }
 
     @Test
@@ -48,9 +50,9 @@ public class ImageServiceTest {
     @Test
     public void delImage() {
         imageRepository.save(image);
-        assertEquals(1, imageRepository.findAll().size());
+        int size = imageRepository.findAll().size();
         imageService.delImage("test.jpeg", "user1");
-        assertEquals(0, imageRepository.findAll().size());
+        assertEquals(size-1, imageRepository.findAll().size());
     }
 
     @Test
