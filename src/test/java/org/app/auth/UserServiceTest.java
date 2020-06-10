@@ -18,21 +18,22 @@ public class UserServiceTest {
     @Test
     public void findByUserName() {
         User testUser = new User();
-        testUser.setUsername("test@test.pl");
+        testUser.setUsername("user_service_user1");
         testUser.setPassword("abc");
         userService.saveUser(testUser);
 
-        assertEquals("test@test.pl",
-                userService.findByUserName("test@test.pl").getUsername());
+        assertEquals("user_service_user1",
+                userService.findByUserName("user_service_user1").getUsername());
     }
 
     @Test
     public void saveUser() {
         User user = new User();
-        user.setUsername("user12");
+        user.setUsername("user_service_user2");
         user.setPassword("pwd");
         userService.saveUser(user);
 
-        assertEquals("user12", userService.findByUserName("user12").getUsername());
+        assertEquals("user_service_user2",
+                userService.findByUserName("user_service_user2").getUsername());
     }
 }

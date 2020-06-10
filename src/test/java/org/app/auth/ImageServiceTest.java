@@ -22,8 +22,8 @@ public class ImageServiceTest {
     @Before
     public void init() {
         image = new Image();
-        image.setFilename("imgServTest.jpeg");
-        image.setUsername("imgServUser");
+        image.setFilename("image_service.jpeg");
+        image.setUsername("image_service_user");
         image.setScore("5");
         image.setAcc("0.75");
         imageService.saveImage(image);
@@ -33,7 +33,8 @@ public class ImageServiceTest {
     @Transactional
     public void saveImage() {
         assertEquals(image.getFilename(),
-                imageRepository.findFirstByFilenameAndUsername("imgServTest.jpeg", "imgServUser")
+                imageRepository.findFirstByFilenameAndUsername(
+                        "image_service.jpeg", "image_service_user")
                 .getFilename());
     }
 
@@ -42,7 +43,8 @@ public class ImageServiceTest {
     public void getPrediction() {
         String prediction = "score:"+image.getScore()+",acc:"+image.getAcc();
 
-        assertEquals(prediction, imageService.getPrediction("imgServTest.jpeg", "imgServUser"));
+        assertEquals(prediction, imageService.getPrediction(
+                "image_service.jpeg", "image_service_user"));
 
     }
 
@@ -50,7 +52,8 @@ public class ImageServiceTest {
     @Transactional
     public void delImage() {
         int size = imageRepository.findAll().size();
-        imageService.delImage("imgServTest.jpeg", "imgServUser");
+        imageService.delImage("image_service.jpeg",
+                "image_service_user");
         assertEquals(size-1, imageRepository.findAll().size());
     }
 
@@ -58,11 +61,11 @@ public class ImageServiceTest {
     @Transactional
     public void getImagesByUsername() {
         assertEquals(image.getUsername(), imageService
-                .getImagesByUsername("imgServUser")
+                .getImagesByUsername("image_service_user")
         .get(0)
         .getUsername());
         assertEquals(image.getFilename(), imageService
-                .getImagesByUsername("imgServUser")
+                .getImagesByUsername("image_service_user")
                 .get(0)
                 .getFilename());
     }

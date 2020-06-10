@@ -23,8 +23,8 @@ public class ImageRepositoryTest {
     @Before
     public void init() {
         image = new Image();
-        image.setFilename("test.jpeg");
-        image.setUsername("user1");
+        image.setFilename("image_repo_test.jpeg");
+        image.setUsername("image_repo_user");
         imageRepository.save(image);
     }
 
@@ -32,11 +32,15 @@ public class ImageRepositoryTest {
     public void findFirstByFilenameAndUsername() {
         assertEquals(image.getFilename(),
                 imageRepository
-                        .findFirstByFilenameAndUsername("test.jpeg", "user1")
+                        .findFirstByFilenameAndUsername(
+                                "image_repo_test.jpeg",
+                                "image_repo_user")
                         .getFilename());
         assertEquals(image.getUsername(),
                 imageRepository
-                        .findFirstByFilenameAndUsername("test.jpeg", "user1")
+                        .findFirstByFilenameAndUsername(
+                                "image_repo_test.jpeg",
+                                "image_repo_user")
                         .getUsername());
     }
 
@@ -46,15 +50,15 @@ public class ImageRepositoryTest {
         list.add(image);
 
         assertEquals(list.size(),
-                imageRepository.findAllByUsername("user1").size());
+                imageRepository.findAllByUsername("image_repo_user").size());
         assertEquals(image.getFilename(),
                 imageRepository
-                        .findAllByUsername("user1")
+                        .findAllByUsername("image_repo_user")
                         .get(0)
                         .getFilename());
         assertEquals(image.getUsername(),
                 imageRepository
-                        .findAllByUsername("user1")
+                        .findAllByUsername("image_repo_user")
                         .get(0)
                         .getUsername());
     }
