@@ -22,48 +22,47 @@ public class ImageServiceTest {
     @Before
     public void init() {
         image = new Image();
-        image.setFilename("test.jpeg");
-        image.setUsername("user1");
+        image.setFilename("imgServTest.jpeg");
+        image.setUsername("imgServUser");
         image.setScore("5");
         image.setAcc("0.75");
+        imageService.saveImage(image);
     }
 
     @Test
     @Transactional
     public void saveImage() {
-        imageService.saveImage(image);
-
         assertEquals(image.getFilename(),
-                imageRepository.findFirstByFilenameAndUsername("test.jpeg", "user1")
+                imageRepository.findFirstByFilenameAndUsername("imgServTest.jpeg", "imgServUser")
                 .getFilename());
     }
 
     @Test
+    @Transactional
     public void getPrediction() {
-        imageRepository.save(image);
         String prediction = "score:"+image.getScore()+",acc:"+image.getAcc();
 
-        assertEquals(prediction, imageService.getPrediction("test.jpeg", "user1"));
+        assertEquals(prediction, imageService.getPrediction("imgServTest.jpeg", "imgServUser"));
 
     }
 
     @Test
+    @Transactional
     public void delImage() {
-        imageRepository.save(image);
         int size = imageRepository.findAll().size();
-        imageService.delImage("test.jpeg", "user1");
+        imageService.delImage("imgServTest.jpeg", "imgServUser");
         assertEquals(size-1, imageRepository.findAll().size());
     }
 
     @Test
+    @Transactional
     public void getImagesByUsername() {
-        imageRepository.save(image);
         assertEquals(image.getUsername(), imageService
-                .getImagesByUsername("user1")
+                .getImagesByUsername("imgServUser")
         .get(0)
         .getUsername());
         assertEquals(image.getFilename(), imageService
-                .getImagesByUsername("user1")
+                .getImagesByUsername("imgServUser")
                 .get(0)
                 .getFilename());
     }

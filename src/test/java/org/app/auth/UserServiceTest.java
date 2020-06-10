@@ -1,5 +1,6 @@
 package org.app.auth;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,14 @@ import static org.junit.Assert.*;
 public class UserServiceTest {
     @Autowired
     UserService userService;
-    @Autowired
-    RoleRepository roleRepository;
 
     @Test
     public void findByUserName() {
+        User testUser = new User();
+        testUser.setUsername("test@test.pl");
+        testUser.setPassword("abc");
+        userService.saveUser(testUser);
+
         assertEquals("test@test.pl",
                 userService.findByUserName("test@test.pl").getUsername());
     }
@@ -25,10 +29,10 @@ public class UserServiceTest {
     @Test
     public void saveUser() {
         User user = new User();
-        user.setUsername("user1");
+        user.setUsername("user12");
         user.setPassword("pwd");
         userService.saveUser(user);
 
-        assertEquals("user1", userService.findByUserName("user1").getUsername());
+        assertEquals("user12", userService.findByUserName("user12").getUsername());
     }
 }

@@ -22,6 +22,8 @@ public class UserRepositoryTest {
     public void init() {
         user = new User();
         user.setUsername("user1");
+        user.setPassword("abc");
+
         if (userRepository.findByUsername("user1")==null) {
             userService.saveUser(user);
         }
