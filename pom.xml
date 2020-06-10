@@ -9,20 +9,20 @@
     <packaging>jar</packaging>
 
     <name>spring-and-react</name>
-    <description>Demo project for React JS + Spring Boot</description>
+    <description>bananapp SpringBoot backend</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.0.1.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <!-- <spring-security.version>5.2.1.RELEASE</spring-security.version> -->
+        <spring-security.version>5.2.1.RELEASE</spring-security.version>
         <spring.version>5.0.6.RELEASE</spring.version>
     </properties>
 
@@ -31,11 +31,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.200</version>
         </dependency>
 
         <dependency>
@@ -47,13 +42,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- API, java.xml.bind module -->
+
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
             <version>2.3.2</version>
         </dependency>
-        <!-- Runtime, com.sun.xml.bind module -->
+
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
@@ -64,7 +59,6 @@
             <artifactId>javassist</artifactId>
             <version>3.23.1-GA</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -127,11 +121,6 @@
             <artifactId>spring-expression</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -153,45 +142,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-
-            <groupId>org.springframework.boot</groupId>
-
-            <artifactId>spring-boot-starter-web</artifactId>
-
-        </dependency>
-
-        <dependency>
-
-            <groupId>org.springframework.boot</groupId>
-
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-
-            <scope>provided</scope>
-
-        </dependency>
-
-        <dependency>
-
-            <groupId>org.apache.tomcat.embed</groupId>
-
-            <artifactId>tomcat-embed-jasper</artifactId>
-
-            <!-- delete? -->
-            <scope>provided</scope>
-
-        </dependency>
-
-        <dependency>
-
-            <groupId>org.springframework.boot</groupId>
-
-            <artifactId>spring-boot-starter-test</artifactId>
-
-            <scope>test</scope>
-
         </dependency>
     </dependencies>
 
