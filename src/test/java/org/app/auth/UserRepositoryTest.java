@@ -20,6 +20,7 @@ public class UserRepositoryTest {
 
     @Before
     public void init() {
+        //given
         user = new User();
         user.setUsername("user_repo_user");
         user.setPassword("abc");
@@ -31,7 +32,10 @@ public class UserRepositoryTest {
 
     @Test
     public void findByUsername() {
-        assertEquals(user.getUsername(),
-                userRepository.findByUsername("user_repo_user").getUsername());
+        //when
+        User savedUser = userRepository.findByUsername("user_repo_user");
+
+        //then
+        assertEquals(user.getUsername(), savedUser.getUsername());
     }
 }

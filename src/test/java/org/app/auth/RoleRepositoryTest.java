@@ -17,7 +17,13 @@ public class RoleRepositoryTest {
 
     @Test
     public void findByName() {
-        assertEquals("ROLE_USER", roleRepository.
-                findByName("ROLE_USER").getName());
+        //given
+        /*"ROLE_USER" is saved in AppInitializator*/
+
+        //when
+        Role savedRole = roleRepository.findByName("ROLE_USER");
+
+        //then
+        assertEquals("ROLE_USER", savedRole.getName());
     }
 }

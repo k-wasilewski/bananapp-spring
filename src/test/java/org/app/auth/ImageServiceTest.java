@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -21,6 +23,7 @@ public class ImageServiceTest {
 
     @Before
     public void init() {
+        //given
         image = new Image();
         image.setFilename("image_service.jpeg");
         image.setUsername("image_service_user");
@@ -32,41 +35,49 @@ public class ImageServiceTest {
     @Test
     @Transactional
     public void saveImage() {
-        assertEquals(image.getFilename(),
-                imageRepository.findFirstByFilenameAndUsername(
-                        "image_service.jpeg", "image_service_user")
-                .getFilename());
+        //when
+        Image savedImage = imageRepository.findFirstByFilenameAndUsername(
+                "image_service.jpeg", "image_service_user");
+        //then
+        assertEquals(image.getFilename(), savedImage.getFilename());
     }
 
     @Test
     @Transactional
     public void getPrediction() {
+        //when
         String prediction = "score:"+image.getScore()+",acc:"+image.getAcc();
+        String savedPrediction = imageService.getPrediction(
+                "image_service.jpeg", "image_service_user");
 
-        assertEquals(prediction, imageService.getPrediction(
-                "image_service.jpeg", "image_service_user"));
+        //then
+        assertEquals(prediction, savedPrediction);
 
     }
 
     @Test
     @Transactional
     public void delImage() {
+        //given
         int size = imageRepository.findAll().size();
+
+        //when
         imageService.delImage("image_service.jpeg",
                 "image_service_user");
+
+        //then
         assertEquals(size-1, imageRepository.findAll().size());
     }
 
     @Test
     @Transactional
     public void getImagesByUsername() {
-        assertEquals(image.getUsername(), imageService
-                .getImagesByUsername("image_service_user")
-        .get(0)
-        .getUsername());
-        assertEquals(image.getFilename(), imageService
-                .getImagesByUsername("image_service_user")
-                .get(0)
-                .getFilename());
+        //when
+        List<Image> savedImages = imageService
+                .getImagesByUsername("image_service_user");
+
+        //then
+        assertEquals(image.getUsername(), savedImages.get(0).getUsername());
+        assertEquals(image.getFilename(), savedImages.get(0).getFilename());
     }
 }

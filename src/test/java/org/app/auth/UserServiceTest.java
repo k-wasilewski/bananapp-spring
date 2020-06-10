@@ -17,23 +17,31 @@ public class UserServiceTest {
 
     @Test
     public void findByUserName() {
+        //given
         User testUser = new User();
         testUser.setUsername("user_service_user1");
         testUser.setPassword("abc");
         userService.saveUser(testUser);
 
-        assertEquals("user_service_user1",
-                userService.findByUserName("user_service_user1").getUsername());
+        //when
+        User savedUser = userService.findByUserName("user_service_user1");
+
+        //then
+        assertEquals("user_service_user1", savedUser.getUsername());
     }
 
     @Test
     public void saveUser() {
+        //given
         User user = new User();
         user.setUsername("user_service_user2");
         user.setPassword("pwd");
-        userService.saveUser(user);
 
-        assertEquals("user_service_user2",
-                userService.findByUserName("user_service_user2").getUsername());
+        //when
+        userService.saveUser(user);
+        User savedUser = userService.findByUserName("user_service_user2");
+
+        //then
+        assertEquals("user_service_user2", savedUser.getUsername());
     }
 }
