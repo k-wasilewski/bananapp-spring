@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:8083")
 public class ImageController {
     private ImageService imageService;
 
