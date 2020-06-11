@@ -8,11 +8,17 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 
 @Configuration
@@ -25,19 +31,26 @@ public class SecSecurityConfig
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().httpBasic().and().authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
+        http.cors().and().authorizeRequests()
                 .antMatchers("/auth/**").hasAnyRole("USER")
+                .anyRequest().permitAll()
                 .and()
-                .formLogin().loginPage("/")
+                .formLogin()
+                .loginProcessingUrl("/")
                 .usernameParameter("username").passwordParameter("password")
-                .defaultSuccessUrl("/success", true)
+                .successHandler(new AuthenticationSuccessHandler() {
+                    @Override
+                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+                        //do nothing
+                    }
+                })
                 .and()
                 .logout()
                 .logoutSuccessUrl("/afterlogout")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
+                .and()
+                .httpBasic()
                 .and()
                 .csrf().disable();
     }

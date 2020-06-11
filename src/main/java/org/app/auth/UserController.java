@@ -29,10 +29,4 @@ public class UserController {
         }
         return "success";
     }
-
-    @RequestMapping(value = "/auth/username", method = RequestMethod.GET)
-    @ResponseBody
-    public String currentUserName(Principal principal) {
-        return principal.getName();
-    }
 }
