@@ -2,13 +2,8 @@ package org.app.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +15,8 @@ public class FilesController {
 
     @RequestMapping(value = "/auth/files", method = RequestMethod.GET)
     @ResponseBody
-    public List<String> files(Principal principal) {
-        List<Image> images = imageService.getImagesByUsername(principal.getName());
+    public List<String> files(@RequestParam("username") String username) {
+        List<Image> images = imageService.getImagesByUsername(username);
 
         List<String> list = new ArrayList<>();
         for (Image i : images) {

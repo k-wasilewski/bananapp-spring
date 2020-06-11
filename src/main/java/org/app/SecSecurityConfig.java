@@ -25,9 +25,10 @@ public class SecSecurityConfig
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().authorizeRequests()
+        http.cors().and().httpBasic().and().authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
                 .antMatchers("/auth/**").hasAnyRole("USER")
-                .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/")
                 .usernameParameter("username").passwordParameter("password")
@@ -35,8 +36,8 @@ public class SecSecurityConfig
                 .and()
                 .logout()
                 .logoutSuccessUrl("/afterlogout")
-                .and()
-                .httpBasic()
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
                 .and()
                 .csrf().disable();
     }
@@ -62,11 +63,11 @@ public class SecSecurityConfig
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8083",
-                "http://localhost:8083/success"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8083"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS"));
         configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setExposedHeaders(Arrays.asList("x-auth-token", "xsrf-token"));
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

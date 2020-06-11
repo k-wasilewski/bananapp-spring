@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8083")
+@CrossOrigin(origins = {"http://localhost:8083",
+        "http://localhost:8083/success"})
 public class SuccessController {
 
     @ResponseBody
