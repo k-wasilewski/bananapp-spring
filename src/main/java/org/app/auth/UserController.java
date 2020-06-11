@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:8083")
+@CrossOrigin(origins = {"http://localhost:8083",
+        "http://localhost:8083/success"})
 public class UserController {
 
     private UserService userService;

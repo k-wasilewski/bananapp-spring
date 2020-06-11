@@ -10,6 +10,8 @@ import javax.annotation.PostConstruct;
 public class AppInitializator {
     @Autowired
     RoleRepository roleRepository;
+    @Autowired
+    UserService userService;
 
     @PostConstruct
     private void init() {
