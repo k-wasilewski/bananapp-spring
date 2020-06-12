@@ -8,10 +8,10 @@ MAINTAINER Kuba Wasilewski <k.k.wasilewski@gmail.com>
 VOLUME /tmp
 
 # The application's jar file
-ARG JAR_FILE=target/spring-and-react-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=target/bananapp-spring-0.0.1-SNAPSHOT.jar
 
 # Add the application's jar to the container
-ADD ${JAR_FILE} spring-and-react.jar
+ADD ${JAR_FILE} bananapp-spring.jar
 
 # Run the jar file 
-ENTRYPOINT ["java","-jar","/spring-and-react.jar"]
+ENTRYPOINT ["java","-jar","/bananapp-spring.jar"]
