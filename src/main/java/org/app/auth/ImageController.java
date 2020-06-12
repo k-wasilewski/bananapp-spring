@@ -49,21 +49,14 @@ public class ImageController {
 
     @RequestMapping(value = "/auth/del", method = RequestMethod.POST)
     @ResponseBody
-    public void delImage(@RequestParam("filename") String filenamePaths,
+    public void delImage(@RequestParam("filename") String filename,
                          @RequestParam("username") String username) {
-        Pattern p = Pattern.compile("\\/([^\\/]*?),");
-        Matcher matcher = p.matcher(filenamePaths);
+        String APP_PATH = "/home/kuba/Desktop/projects/bananapp-react/public/auth";
 
-        String APP_PATH = "/home/kuba/Pulpit/CodersLab/spring-and-react/target/classes/public/auth";
+        imageService.delImage(filename, username);
 
-        if (matcher.find()){
-            String filename = matcher.group(1);
-            imageService.delImage(filename, username);
-
-            String filepath = APP_PATH + File.separator + username +
-                    File.separator + filename;
-            File file = new File(filepath);
-            file.delete();
-        }
+        String filepath = APP_PATH + File.separator + username + File.separator + filename;
+        File file = new File(filepath);
+        file.delete();
     }
 }
