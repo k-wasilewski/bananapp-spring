@@ -44,7 +44,7 @@ public class SecSecurityConfig
                                                         HttpServletResponse response,
                                                         Authentication authentication)
                             throws IOException, ServletException {
-                        //do nothing
+                        response.sendRedirect("/success");
                     }
                 })
                 .and()
