@@ -46,7 +46,7 @@ public class ImageServiceTest {
     @Transactional
     public void getPrediction() {
         //when
-        String prediction = "score:"+image.getScore()+",acc:"+image.getAcc();
+        String prediction = "score:"+image.getScore()+",accuracy:"+image.getAcc();
         String savedPrediction = imageService.getPrediction(
                 "image_service.jpeg", "image_service_user");
 
