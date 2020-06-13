@@ -5,8 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:8083")
@@ -23,7 +21,7 @@ public class ImageController {
                               @RequestParam("uname") String username,
                               @RequestParam("link") String link) {
         try {
-            Image img = new Image();//save to db appending 1 if exists
+            Image img = new Image();
             img.setFilename(filename);
             img.setScore(score);
             img.setAcc(acc);

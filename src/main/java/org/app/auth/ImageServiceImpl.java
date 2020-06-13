@@ -27,7 +27,7 @@ public class ImageServiceImpl implements ImageService {
         Image image = imageRepository.findFirstByFilenameAndUsername(filename, username);
         imageRepository.delete(image);
     }
-
+    
     @Override
     public List<Image> getImagesByUsername(String username) {
         return imageRepository.findAllByUsername(username);
