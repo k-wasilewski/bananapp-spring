@@ -20,7 +20,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public String getPrediction(String filename, String username) {
         Image image = imageRepository.findFirstByFilenameAndUsername(filename, username);
-        return "score:"+image.getScore()+",acc:"+image.getAcc();
+        return "score:"+image.getScore()+",accuracy:"+image.getAcc();
     }
     @Override
     public void delImage(String filename, String username) {

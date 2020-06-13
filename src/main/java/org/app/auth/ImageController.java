@@ -23,7 +23,7 @@ public class ImageController {
                               @RequestParam("uname") String username,
                               @RequestParam("link") String link) {
         try {
-            Image img = new Image();
+            Image img = new Image();//save to db appending 1 if exists
             img.setFilename(filename);
             img.setScore(score);
             img.setAcc(acc);
