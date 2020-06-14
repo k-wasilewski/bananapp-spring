@@ -37,15 +37,9 @@ public class SecurityConfig
                 .formLogin()
                 .loginProcessingUrl("/")
                 .usernameParameter("username").passwordParameter("password")
-                .successHandler(new AuthenticationSuccessHandler() {
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest request,
-                                                        HttpServletResponse response,
-                                                        Authentication authentication)
-                            throws IOException, ServletException {
-                        response.sendRedirect("/success");
-                    }
-                })
+                .successHandler(
+                        (request, response, authentication) -> response.sendRedirect("/success")
+                )
                 .and()
                 .logout()
                 .logoutSuccessUrl("/afterlogout")
