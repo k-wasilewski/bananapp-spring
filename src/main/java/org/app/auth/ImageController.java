@@ -49,7 +49,7 @@ public class ImageController {
     @ResponseBody
     public void delImage(@RequestParam("filename") String filename,
                          @RequestParam("username") String username) {
-        String APP_PATH = "/home/kuba/Desktop/projects/bananapp-react/public/auth";
+        String APP_PATH = "/home/bananapp/auth";
 
         imageService.delImage(filename, username);
 
