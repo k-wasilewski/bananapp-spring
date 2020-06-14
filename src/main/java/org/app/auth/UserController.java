@@ -19,6 +19,9 @@ public class UserController {
     @ResponseBody
     public String createUser(@RequestParam("username") String username,
                              @RequestParam("password") String password) {
+        if (password.equals("") || username.equals("")) {
+            return "fail";
+        }
         try {
             User user = new User();
             user.setUsername(username);
