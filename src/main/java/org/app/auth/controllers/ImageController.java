@@ -63,7 +63,7 @@ public class ImageController {
 
         String filepath = APP_PATH + File.separator + username + File.separator + filename;
         File file = new File(filepath);
-        System.out.println(file.exists());
+
         if (file.exists()) file.delete();
     }
 }
