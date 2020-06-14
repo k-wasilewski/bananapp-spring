@@ -1,5 +1,6 @@
 package org.app.auth;
 
+import org.app.auth.POJOs.Prediction;
 import org.app.auth.entities.Image;
 import org.app.auth.repositories.ImageRepository;
 import org.app.auth.services.ImageService;
@@ -30,8 +31,8 @@ public class ImageServiceTest {
         image = new Image();
         image.setFilename("image_service.jpeg");
         image.setUsername("image_service_user");
-        image.setScore("5");
-        image.setAcc("0.75");
+        image.setScore(5.0);
+        image.setAcc(0.75);
         imageService.saveImage(image);
     }
 
@@ -50,7 +51,7 @@ public class ImageServiceTest {
     public void getPrediction() {
         //when
         String prediction = "score:"+image.getScore()+",accuracy:"+image.getAcc();
-        String savedPrediction = imageService.getPrediction(
+        Prediction savedPrediction = imageService.getPrediction(
                 "image_service.jpeg", "image_service_user");
 
         //then

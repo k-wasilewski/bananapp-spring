@@ -8,8 +8,8 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String filename;
-    private String score;
-    private String acc;
+    private Double score;
+    private Double acc;
     private String username;
     @Column(length = 100000)
     private String link;
@@ -41,19 +41,19 @@ public class Image {
         this.filename = filename;
     }
 
-    public String getScore() {
+    public Double getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 
-    public String getAcc() {
+    public Double getAcc() {
         return acc;
     }
 
-    public void setAcc(String acc) {
+    public void setAcc(Double acc) {
         this.acc = acc;
     }
 

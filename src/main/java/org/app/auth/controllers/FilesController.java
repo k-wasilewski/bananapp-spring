@@ -1,5 +1,7 @@
 package org.app.auth.controllers;
 
+import com.google.gson.Gson;
+import org.app.auth.POJOs.File;
 import org.app.auth.entities.Image;
 import org.app.auth.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,14 @@ public class FilesController {
     @ResponseBody
     public List<String> files(Principal principal) {
         List<Image> images = imageService.getImagesByUsername(principal.getName());
+        List<String> jsonFileList = new ArrayList<>();
 
-        List<String> list = new ArrayList<>();
         for (Image i : images) {
-            list.add(i.getFilename()+",,,"+i.getLink());
+            File file = new File(i.getFilename(), i.getLink());
+            String json = new Gson().toJson(file);
+            jsonFileList.add(json);
         }
-        return list;
+
+        return jsonFileList;
     }
 }

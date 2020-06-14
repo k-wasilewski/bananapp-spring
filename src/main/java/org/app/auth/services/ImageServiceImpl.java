@@ -1,5 +1,6 @@
 package org.app.auth.services;
 
+import org.app.auth.POJOs.Prediction;
 import org.app.auth.entities.Image;
 import org.app.auth.repositories.ImageRepository;
 import org.springframework.context.annotation.Lazy;
@@ -21,9 +22,9 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public String getPrediction(String filename, String username) {
+    public Prediction getPrediction(String filename, String username) {
         Image image = imageRepository.findFirstByFilenameAndUsername(filename, username);
-        return "score:"+image.getScore()+",accuracy:"+image.getAcc();
+        return new Prediction(image.getScore(), image.getAcc());
     }
 
     @Override
