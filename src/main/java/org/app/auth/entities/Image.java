@@ -1,4 +1,4 @@
-package org.app.auth;
+package org.app.auth.entities;
 
 import javax.persistence.*;
 

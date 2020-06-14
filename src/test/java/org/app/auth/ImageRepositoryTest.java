@@ -1,5 +1,7 @@
 package org.app.auth;
 
+import org.app.auth.entities.Image;
+import org.app.auth.repositories.ImageRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

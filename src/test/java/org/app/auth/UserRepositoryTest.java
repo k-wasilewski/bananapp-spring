@@ -1,5 +1,8 @@
 package org.app.auth;
 
+import org.app.auth.entities.User;
+import org.app.auth.repositories.UserRepository;
+import org.app.auth.services.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

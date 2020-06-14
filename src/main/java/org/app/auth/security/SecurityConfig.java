@@ -1,6 +1,5 @@
-package org.app;
+package org.app.auth.security;
 
-import org.app.auth.SpringDataUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-public class SecSecurityConfig
+public class SecurityConfig
         extends WebSecurityConfigurerAdapter {
 
     @Autowired

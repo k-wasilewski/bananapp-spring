@@ -1,9 +1,10 @@
-package org.app.auth;
+package org.app.auth.controllers;
 
+import org.app.auth.entities.User;
+import org.app.auth.services.UserService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.security.Principal;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:8083")

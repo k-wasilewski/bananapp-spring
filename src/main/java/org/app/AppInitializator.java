@@ -1,6 +1,8 @@
 package org.app;
 
-import org.app.auth.*;
+import org.app.auth.entities.Role;
+import org.app.auth.repositories.RoleRepository;
+import org.app.auth.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

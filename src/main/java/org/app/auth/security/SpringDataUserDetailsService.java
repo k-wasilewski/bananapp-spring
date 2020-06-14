@@ -1,5 +1,7 @@
-package org.app.auth;
+package org.app.auth.security;
 
+import org.app.auth.entities.User;
+import org.app.auth.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

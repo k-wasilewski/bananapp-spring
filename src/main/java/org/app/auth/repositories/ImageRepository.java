@@ -1,5 +1,6 @@
-package org.app.auth;
+package org.app.auth.repositories;
 
+import org.app.auth.entities.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

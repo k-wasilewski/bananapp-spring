@@ -1,5 +1,7 @@
-package org.app.auth;
+package org.app.auth.services;
 
+import org.app.auth.entities.Image;
+import org.app.auth.repositories.ImageRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 

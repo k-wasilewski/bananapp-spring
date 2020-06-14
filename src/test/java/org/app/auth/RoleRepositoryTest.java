@@ -1,6 +1,7 @@
 package org.app.auth;
 
-import org.junit.Before;
+import org.app.auth.entities.Role;
+import org.app.auth.repositories.RoleRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
