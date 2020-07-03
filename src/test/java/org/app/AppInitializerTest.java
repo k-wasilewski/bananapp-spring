@@ -1,4 +1,4 @@
-package org.app.auth;
+package org.app;
 
 import org.app.auth.entities.Role;
 import org.app.auth.repositories.RoleRepository;
@@ -6,20 +6,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.*;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RoleRepositoryTest {
+public class AppInitializerTest {
     @Autowired
     RoleRepository roleRepository;
 
     @Test
-    public void findByName() {
+    public void init() {
         //given
-        /*"ROLE_USER" is saved in AppInitializator*/
+        /*"ROLE_USER" is saved in AppInitializer*/
 
         //when
         Role savedRole = roleRepository.findByName("ROLE_USER");

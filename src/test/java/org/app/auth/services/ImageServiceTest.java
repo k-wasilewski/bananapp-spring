@@ -1,4 +1,4 @@
-package org.app.auth;
+package org.app.auth.services;
 
 import org.app.auth.POJOs.Prediction;
 import org.app.auth.entities.Image;

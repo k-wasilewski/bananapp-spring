@@ -1,4 +1,4 @@
-package org.app.auth;
+package org.app.auth.services;
 
 import org.app.auth.entities.User;
 import org.app.auth.services.UserService;
