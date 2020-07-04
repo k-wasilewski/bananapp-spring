@@ -23,15 +23,18 @@ public class SecurityConfigTest {
     @Test
     @WithMockUser(username = "test@test.pl", password = "test", roles = "USER")
     public void authPathAccess() throws Exception {
-        mockMvc.perform(get("/auth/files"))
+        mockMvc.perform(get("/auth/files")
+                .header("Origin", "http://localhost:8083"))
                 .andExpect(status().isOk())
                 .andReturn();
 
-        mockMvc.perform(get("/logout"))
+        mockMvc.perform(get("/logout")
+                .header("Origin", "http://localhost:8083"))
                 .andExpect(status().isNoContent())
                 .andReturn();
 
-        mockMvc.perform(get("/auth/files"))
+        mockMvc.perform(get("/auth/files")
+                .header("Origin", "http://localhost:8083"))
                 .andExpect(status().isUnauthorized())
                 .andReturn();
     }
