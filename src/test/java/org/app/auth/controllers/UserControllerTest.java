@@ -1,0 +1,54 @@
+package org.app.auth.controllers;
+
+import org.app.auth.entities.Image;
+import org.app.auth.entities.User;
+import org.app.auth.services.ImageService;
+import org.app.auth.services.UserService;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+public class UserControllerTest {
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    UserService userService;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Test
+    @WithMockUser(username = "test@test.pl", password = "test", roles = "USER")
+    public void createUser() throws Exception {
+        //given
+        final String username = "test@test.pl";
+        final String password = "test";
+
+        //when
+        mockMvc.perform(post("/create-user?username="+username+"&password="+password)
+                .header("Origin", "http://localhost:8083"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.valueOf("text/plain;charset=UTF-8")))
+                .andExpect(content().string("success"))
+                .andReturn();
+        User savedUser = userService.findByUserName(username);
+
+        //then
+        assertNotNull(savedUser);
+    }
+}
