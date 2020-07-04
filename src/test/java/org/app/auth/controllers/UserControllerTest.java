@@ -1,13 +1,9 @@
 package org.app.auth.controllers;
 
-import org.app.auth.entities.Image;
 import org.app.auth.entities.User;
-import org.app.auth.services.ImageService;
 import org.app.auth.services.UserService;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
