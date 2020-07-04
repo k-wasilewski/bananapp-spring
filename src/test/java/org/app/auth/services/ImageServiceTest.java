@@ -49,12 +49,14 @@ public class ImageServiceTest {
     @Transactional
     public void getPrediction() {
         //when
-        String prediction = "score:"+image.getScore()+",accuracy:"+image.getAcc();
+        Prediction prediction = new Prediction(
+                image.getScore(), image.getAcc());
         Prediction savedPrediction = imageService.getPrediction(
                 "image_service.jpeg", "image_service_user");
 
         //then
-        assertEquals(prediction, savedPrediction);
+        assertEquals(prediction.getScore(), savedPrediction.getScore());
+        assertEquals(prediction.getAccuracy(), savedPrediction.getAccuracy());
 
     }
 

@@ -1,8 +1,10 @@
 package org.app.auth.controllers;
 
 import org.app.auth.entities.Image;
+import org.app.auth.repositories.ImageRepository;
 import org.app.auth.repositories.UserRepository;
 import org.app.auth.services.ImageService;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +32,8 @@ public class FilesControllerTest {
     ImageService imageService;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    ImageRepository imageRepository;
 
     final static String FILENAME = "filename";
     final static String LINK = "abc";
@@ -42,6 +46,12 @@ public class FilesControllerTest {
         image.setFilename(FILENAME);
         image.setLink(LINK);
         imageService.saveImage(image);
+    }
+
+    @After
+    public void destr() {
+        imageRepository.delete(
+                imageRepository.findAllByUsername("test@test.pl").get(0));
     }
 
     @Test

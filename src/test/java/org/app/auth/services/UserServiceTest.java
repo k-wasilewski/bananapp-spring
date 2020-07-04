@@ -1,6 +1,7 @@
 package org.app.auth.services;
 
 import org.app.auth.entities.User;
+import org.app.auth.repositories.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import static org.junit.Assert.*;
 public class UserServiceTest {
     @Autowired
     UserService userService;
+    @Autowired
+    UserRepository userRepository;
 
     @Test
     public void findByUserName() {
@@ -28,6 +31,8 @@ public class UserServiceTest {
 
         //then
         assertEquals("user_service_user1", savedUser.getUsername());
+
+        userRepository.delete(userRepository.findByUsername("user_service_user1"));
     }
 
     @Test
@@ -43,5 +48,7 @@ public class UserServiceTest {
 
         //then
         assertEquals("user_service_user2", savedUser.getUsername());
+
+        userRepository.delete(userRepository.findByUsername("user_service_user2"));
     }
 }

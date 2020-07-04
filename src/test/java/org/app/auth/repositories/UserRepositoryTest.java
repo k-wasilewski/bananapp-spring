@@ -2,6 +2,7 @@ package org.app.auth.repositories;
 
 import org.app.auth.entities.User;
 import org.app.auth.services.UserService;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,11 @@ public class UserRepositoryTest {
         if (userRepository.findByUsername("user_repo_user")==null) {
             userService.saveUser(user);
         }
+    }
+
+    @After
+    public void destr() {
+        userRepository.delete(userRepository.findByUsername("user_repo_user"));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package org.app.auth.repositories;
 
 import org.app.auth.entities.Image;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +28,13 @@ public class ImageRepositoryTest {
         image.setFilename("image_repo_test.jpeg");
         image.setUsername("image_repo_user");
         imageRepository.save(image);
+    }
+
+    @After
+    public void destr() {
+        imageRepository.delete(imageRepository.findFirstByFilenameAndUsername(
+                "image_repo_test.jpeg", "image_repo_user"
+        ));
     }
 
     @Test

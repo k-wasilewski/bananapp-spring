@@ -17,4 +17,12 @@ public class Prediction {
         this.accuracy=accuracy;
         this.filename=filename;
     }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public Double getAccuracy() {
+        return accuracy;
+    }
 }

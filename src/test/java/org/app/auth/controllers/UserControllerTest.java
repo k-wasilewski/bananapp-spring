@@ -1,14 +1,15 @@
 package org.app.auth.controllers;
 
 import org.app.auth.entities.User;
+import org.app.auth.repositories.UserRepository;
 import org.app.auth.services.UserService;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -26,13 +27,18 @@ public class UserControllerTest {
     @Autowired
     UserService userService;
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    UserRepository userRepository;
+
+    @After
+    public void destr() {
+        userRepository.delete(userRepository.findByUsername("test2@test.pl"));
+    }
 
     @Test
     @WithMockUser(username = "test@test.pl", password = "test", roles = "USER")
     public void createUser() throws Exception {
         //given
-        final String username = "test@test.pl";
+        final String username = "test2@test.pl";
         final String password = "test";
 
         //when
